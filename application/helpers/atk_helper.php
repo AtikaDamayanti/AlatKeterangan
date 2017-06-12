@@ -1,8 +1,8 @@
 <?php
-function gen_id($kd, $table, $kolom, $panjang)
+function gen_id($kd, $table, $kolom, $panjang, $awal)
 {
   $ci =& get_instance();
-  $query = $ci->db->query("select ifnull(max(substr(".$kolom.",3)),0)+1 as max_id from ".$table."");
+  $query = $ci->db->query("select ifnull(max(substr(".$kolom.",".$awal.")),0)+1 as max_id from ".$table."");
   $id = $query->row_array();
   $max = $id["max_id"];
   return strtoupper($kd).str_pad($max,$panjang,"0",STR_PAD_LEFT);

@@ -14,12 +14,12 @@ class master extends CI_Controller {
 		$id = $this->session->userdata('unit_kerja');
 
 		//ambil kode
-		$data['kode_dv'] = gen_id('DV', 'divisi', 'KODE_DIVISI', 3);
-		$data['kode_jb'] = gen_id('JB', 'jabatan', 'KODE_JABATAN', 3);
-		$data['kode_jd'] = gen_id('JD', 'jenis_dokumen', 'KODE_JENIS_DOKUMEN', 3);
-		$data['kode_sd'] = gen_id('SD', 'status_dokumen', 'KODE_STATUS_DOKUMEN', 3);
-		$data['kode_wp'] = gen_id('WP', 'wajib_pajak', 'KODE_WP', 3);
-		$data['kode_nwp'] = gen_id('NW', 'non_wajib_pajak', 'KODE_NON_WP', 3);
+		$data['kode_dv'] = gen_id('DV', 'divisi', 'KODE_DIVISI', 3, 3);
+		$data['kode_jb'] = gen_id('JB', 'jabatan', 'KODE_JABATAN', 3, 3);
+		$data['kode_jd'] = gen_id('JD', 'jenis_dokumen', 'KODE_JENIS_DOKUMEN', 3, 3);
+		$data['kode_sd'] = gen_id('SD', 'status_dokumen', 'KODE_STATUS_DOKUMEN', 3, 3);
+		$data['kode_wp'] = gen_id('WP', 'wajib_pajak', 'KODE_WP', 3, 3);
+		$data['kode_nwp'] = gen_id('NW', 'non_wajib_pajak', 'KODE_NON_WP', 3, 3);
 		
 		//ambil combobox
 		$data['cb_dv'] = $this->master->cb_dv();
@@ -89,7 +89,6 @@ class master extends CI_Controller {
 	    	$row = array();
 	    	$row[] = $value->NIP;
 	    	$row[] = $value->NAMA_J;
-	    	$row[] = $value->PASSWORD;
 	    	$row[] = $value->NAMA_PEGAWAI;
 	    	$row[] = $value->ALAMAT_PEGAWAI;
 	    	$row[] = $value->TELP_PEGAWAI;

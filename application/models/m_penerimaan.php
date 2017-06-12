@@ -22,7 +22,7 @@ class M_penerimaan extends CI_Model {
 
 	function cb_status_dok()
 	{
-		$query = $this->db->query("select * from status_dokumen where kode_status_dokumen in ('SDK3','SDK4') ");
+		$query = $this->db->query("select * from status_dokumen where kode_status_dokumen in ('SD003','SD004') ");
 		return $query->result();
 	}
 
@@ -120,11 +120,12 @@ class M_penerimaan extends CI_Model {
 
 	//tambah data
 	function add_trm($nip){
+		$penerima = $this->input->post('tujuan');
 		$add_trm = array(
 			'NO_ALKET' => $this->input->post('alket_no'),
 			'TGL_DISPOSISI' => date("Y-m-d h:i:s"),
 			'PENGIRIM_DISPOSISI' => $nip,
-			'PENERIMA_DISPOSISI' => $this->input->post('tujuan'),
+			'PENERIMA_DISPOSISI' => $penerima,
 			'KETERANGAN' => $this->input->post('keterangan') 
 			);
 		$this->db->insert('disposisi', $add_trm);
@@ -137,6 +138,18 @@ class M_penerimaan extends CI_Model {
 				);
 		$this->db->where($where);
 		$this->db->update('alket',$data);
+
+		$id = gen_id(date("ymd"), 'pemberitahuan', 'kode_pemberitahuan', 3, 7);
+		$tujuan = $this->db->query("select nip from pegawai where nip = '$penerima' ")->result_array();
+
+		$add_notif = array(
+			'kode_pemberitahuan' => $id,
+			'status_pemberitahuan' => 'belum',
+			'asal_pemberitahuan' => $nip,
+			'tujuan_pemberitahuan' => $tujuan["0"]["nip"],
+			'keterangan_pemberitahuan' => 'MP02' 
+		);
+		$this->db->insert('pemberitahuan', $add_notif);
 	}
 
 	function add_rls($nip){
@@ -167,8 +180,29 @@ class M_penerimaan extends CI_Model {
 				$dt['AR'] = $ar;
 				$this->db->insert('wajib_pajak',$dt);
 			};
-			
 		}
+
+		$id = gen_id(date("ymd"), 'pemberitahuan', 'kode_pembe ritahuan', 3);
+		$tujuan = $this->db->query("select nip, kode_unit_kerja from pegawai p join jabatan j on p.kode_jabatan = j.kode_jabatan join jabatan b on j.kode_jabatan = b.jabatan_induk where nip = '$nip' ")->result_array();
+
+		for ($i=0; $i < sizeOf($tujuan); $i++) { 
+			if($tujuan[$i]["kode_unit_kerja"] == '20001') {
+				$kp = 'MP03';
+			} else {
+				$kp = 'MP04';
+			}
+
+			$add_notif = array(
+			'kode_pemberitahuan' => $id,
+			'status_pemberitahuan' => 'belum',
+			'asal_pemberitahuan' => $nip,
+			'tujuan_pemberitahuan' => $tujuan[$i]["nip"],
+			'keterangan_pemberitahuan' => $kp 
+			);
+			$this->db->insert('pemberitahuan', $add_notif);
+		}
+
+
 	}
 
 }

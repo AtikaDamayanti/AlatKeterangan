@@ -14,7 +14,7 @@
                 <div class="panel-body">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
-                        <li class=<?php if($level=='3') { echo "hide";  } else { "active"; } ?>><a href="#baru" data-toggle="tab">Baru</a></li>
+                        <li class=<?php if($level=='3') { echo "hide";  } else { "active"; } ?>><a href="#baru" data-toggle="tab">Terima</a></li>
                         <li class=<?php if($level=='3') { echo "active";  } ?>><a href="#realisasi" data-toggle="tab">Realisasi</a></li>
                     </ul>
 
@@ -272,7 +272,6 @@
                                             <label>Keterangan</label>
                                             <textarea class="form-control" id="keterangan" required></textarea>
                                         </div>
-
                                         <div class="form-group">
                                             <label>Status Realisasi</label>
                                             <select class="form-control" id="status" name="status" required>

@@ -18,6 +18,7 @@ class pengiriman extends CI_Controller {
 		$data['cb_jd'] = $this->pengiriman->cb_jd();
 		$data['cb_uk'] = $this->pengiriman->cb_uk();
 		$data['cb_wp'] = $this->pengiriman->cb_wp();
+		$data['cb_nwp'] = $this->pengiriman->cb_nwp();
 
 		$this->load->view('v_pengiriman',$data);
 	}
@@ -31,8 +32,9 @@ class pengiriman extends CI_Controller {
 	    	$row[] = $value->NO_ALKET;
 	    	$row[] = $value->UK_ASAL;
 	    	$row[] = $value->UK_TUJUAN;
+	    	$row[] = $value->KODE;
 	    	$row[] = $value->NPWP;
-	    	$row[] = $value->NAMA_WP;
+	    	$row[] = $value->NAMA;
 	    	$row[] = $value->NAMA_JENIS_DOKUMEN;
 	    	$row[] = $value->LEMBAR;
 	    	$row[] = $value->NILAI_ALKET;
@@ -63,11 +65,11 @@ class pengiriman extends CI_Controller {
 	    $data = array();
 	    foreach ($result as $value) {
 	    	$row = array();
-	    	$row[] = $value->UK_TUJUAN;
-	    	$row[] = $value->DARI;
-	    	$row[] = $value->KEPADA;
-	    	$row[] = $value->NO_ALKET;
-	    	$row[] = $value->TGL_DISPOSISI;
+	    	$row[] = $value->uk_tujuan;
+	    	$row[] = $value->dari;
+	    	$row[] = $value->kepada;
+	    	$row[] = $value->no_alket;
+	    	$row[] = $value->tgl_disposisi;
 	    	$data[] = $row;
 		}
 		echo json_encode(['data' => $data]);
@@ -93,6 +95,8 @@ class pengiriman extends CI_Controller {
 
 	// tambah data
 	public function addAk(){
+		$asal = $this->session->userdata('nip');
+
 	    $config['upload_path'] = 'uploads/';
         $config['allowed_types'] = '*';
         $config['max_filename'] = '255';
@@ -112,7 +116,8 @@ class pengiriman extends CI_Controller {
                     } else {
                         //echo  'File successfully uploaded '.$_FILES['file']['name'];
                         $pct = $_FILES['file']['name'];
-                        $this->pengiriman->add_ak($pct);
+                        $this->pengiriman->add_ak($pct, $asal);
+
                     }
                 }
             }

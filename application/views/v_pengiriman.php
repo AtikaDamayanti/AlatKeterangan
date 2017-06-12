@@ -32,12 +32,14 @@
                                 <a class="btn btn-primary glyphicon-asterisk" data-toggle="modal" onclick="reload_ak()"> Perbarui</a>
                             </p>
                             <!-- Tabel -->
+                            <div class="table-responsive">
                             <table class="display nowrap" id="tbl_ak" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Asal</th>
                                         <th>Tujuan</th>
+                                        <th>Kode</th>
                                         <th>NPWP</th>
                                         <th>Nama</th>
                                         <th>Jenis</th>
@@ -52,6 +54,7 @@
                                         <th>No</th>
                                         <th>Asal</th>
                                         <th>Tujuan</th>
+                                        <th>Kode</th>
                                         <th>NPWP</th>
                                         <th>Nama</th>
                                         <th>Jenis</th>
@@ -62,6 +65,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            </div>
                             <!-- Modal -->
                             <div class="modal fade" id="modal_ak" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -102,12 +106,29 @@
                                          </div>
 
                                          <div class="form-group">
-                                            <label>Data Wajib Pajak</label>	
-                                            <select class="form-control" id="kode_wp" id="kode_wp" name="kode_wp" required>
+                                            <input type="radio" name="radio" value="wajib_pajak" id="rwp" onClick="tampil()"> Wajib Pajak
+                                            <input type="radio" name="radio" value="non_wajib_pajak" id="rnwp" onClick="tampil()"> Non Wajib Pajak
+                                         </div>
+
+                                         <div class="form-group">
+                                            <label id="label_wp">Data Wajib Pajak</label>	
+                                            <select class="form-control" id="kode_wp" name="kode_wp" required>
                                               <option disabled selected value="">-Pilih Wajib Pajak-</option>
                                               <?php
                                               foreach($cb_wp as $row) {
                                                  echo "<option value= ".$row->KODE_WP.">".$row->NAMA_WP." - ".$row->NPWP." </option>";
+                                             }
+                                             ?>
+                                         </select>
+                                     </div>
+
+                                     <div class="form-group">
+                                            <label id="label_nwp">Data Non Wajib Pajak</label> 
+                                            <select class="form-control" id="kode_nwp" name="kode_nwp" required>
+                                              <option disabled selected value="">-Pilih Non Wajib Pajak-</option>
+                                              <?php
+                                              foreach($cb_nwp as $row) {
+                                                 echo "<option value= ".$row->KODE_NON_WP.">".$row->NAMA_NON_WP."</option>";
                                              }
                                              ?>
                                          </select>
@@ -154,6 +175,11 @@
 
                 $(document).ready(function() {
 
+                $("#kode_wp").hide();
+                $("#kode_nwp").hide();
+                $("#label_wp").hide();
+                $("#label_nwp").hide();
+
                 $("#btn_simpan_ak").click(function(){
                     var url;
                     if(save_method == 'add') {
@@ -191,11 +217,31 @@
             });
 
         //$("#kode_wp").select2({width : 'resolve'});
+        function klik(){
+            var selectCtrl = document.getElementById("kode_nwp");
+            var selectedItem =  selectCtrl.options[selectCtrl.selectedIndex];
+            alert("Value= "+ selectedItem.value+", Text= " + selectedItem.text );
+        }
 
         function reload_ak(){
             $("#modal_ak").modal('hide');
             var oTable = $('#tbl_ak').DataTable();
             oTable.ajax.reload();
+        }
+
+        function tampil() {
+            if (document.getElementById("rwp").checked == true) {
+                $("#label_wp").show();
+                $("#kode_wp").show();
+                // $("#label_nwp").hide();
+                // $("#kode_nwp").hide();
+            }
+            else if (document.getElementById("rnwp").checked == true) {
+                $("#label_nwp").show();
+                $("#kode_nwp").show();
+                // $("#label_wp").hide();
+                // $("#kode_wp").hide();
+            }
         }
 
         function delete_ak(id){
@@ -259,6 +305,7 @@
                                 <a class="btn btn-primary glyphicon-asterisk" data-toggle="modal" onclick="reload_trm()"> Perbarui</a>
                             </p>
                             <!-- Tabel -->
+                            <div class="table-responsive">
                             <table class="display nowrap" id="tbl_trm" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -277,6 +324,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            </div>
                             <script type="text/javascript">
                                 var save_method;
 
@@ -304,6 +352,7 @@
                                 <a class="btn btn-primary glyphicon-asterisk" data-toggle="modal" onclick="reload_dps()"> Perbarui</a>
                             </p>
                             <!-- Tabel -->
+                            <div class="table-responsive">
                             <table class="display nowrap" id="tbl_dps" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -324,6 +373,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            </div>
                             <script type="text/javascript">
                                 var save_method;
 
@@ -350,6 +400,7 @@
                                 <a class="btn btn-primary glyphicon-asterisk" data-toggle="modal" onclick="reload_rls()"> Perbarui</a>
                             </p>
                             <!-- Tabel -->
+                            <div class="table-responsive">
                             <table class="display nowrap" id="tbl_rls" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -376,6 +427,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            </div>
                             <script type="text/javascript">
                                 var save_method;
 

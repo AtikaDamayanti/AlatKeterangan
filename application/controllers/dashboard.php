@@ -13,6 +13,29 @@ class dashboard extends CI_Controller {
 		$this->load->view('v_dashboard');
 	}
 
+	public function getNotif(){
+		$nip = $this->session->userdata('nip');
+		$result = $this->dashboard->getNotif($nip);
+		$data = array();
+		foreach ($result as $value) {
+			echo "<a href='$value->link_mp'><i class='fa fa-tasks fa-fw'></i> 
+            <span class='pull-right text-muted small' onclick='updateNotif(".$value->kode_pemberitahuan.")'>".$value->dari."</span></a>";
+		}
+	}
+
+	public function getJumlahNotif(){
+		$nip = $this->session->userdata('nip');
+		$result = $this->dashboard->getJumlahNotif($nip);
+		$data = array();
+		foreach ($result as $value) {
+			echo "<span class='label label-danger'>$value->jml</span><i class='fa fa-bell fa-fw'></i> <i class='fa fa-caret-down'></i>";
+		}
+	}
+
+	public function updateNotif($id){
+		$this->dashboard->update_notif();
+	}
+
 	public function dataRekap(){
 		$lv = $this->session->userdata('level');
 		$uk = $this->session->userdata('unit_kerja');

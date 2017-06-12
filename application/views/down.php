@@ -1,6 +1,9 @@
+    <script src="<?php echo base_url('/assets/js/jquery-migrate-1.2.1.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
+
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/metisMenu.min.js'); ?>"></script>
-
     <script src="<?php echo base_url('assets/js/raphael.min.js'); ?>"></script>
     <!--<script src="../data/morris-data.js"></script>-->
 

@@ -525,24 +525,22 @@ function submit_uk(){
         <thead>
             <tr>
                 <th>NIP</th>
-                <th>JABATAN</th>
-                <th>PASSWORD</th>
-                <th>NAMA</th>
-                <th>ALAMAT</th>
-                <th>TELEPON</th>
-                <th>UNIT KERJA</th>
+                <th>Jabatan</th>
+                <th>Nama</th>
+                <th>Alamat</th>
+                <th>Telepon</th>
+                <th>Unit Kerja</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th>NIP</th>
-                <th>JABATAN</th>
-                <th>PASSWORD</th>
-                <th>NAMA</th>
-                <th>ALAMAT</th>
-                <th>TELEPON</th>
-                <th>UNIT KERJA</th>
+                <th>Jabatan</th>
+                <th>Nama</th>
+                <th>Alamat</th>
+                <th>Telepon</th>
+                <th>Unit Kerja</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>
@@ -1024,6 +1022,7 @@ function submit_uk(){
                 <th>NPWP</th>
                 <th>Nama</th>
                 <th>Alamat</th>
+                <th>Telepon</th>
                 <th>Account Representative</th>
                 <th>Aksi</th>
             </tr>
@@ -1034,6 +1033,7 @@ function submit_uk(){
                 <th>NPWP</th>
                 <th>Nama</th>
                 <th>Alamat</th>
+                <th>Telepon</th>
                 <th>Account Representative</th>
                 <th>Aksi</th>
             </tr>

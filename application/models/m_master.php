@@ -2,96 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_master extends CI_Model {
-
-	// ambil kode
-	// function kode_uk(){
-	// 	$kd = 'UK';
-	// 	$query = $this->db->query("select IFNULL(MAX(substr(KODE_UNIT_KERJA, 3)),0)+1 as max_id from unit_kerja");
-	// 	$row = $query->row_array();
-	// 	$max_id = $row['max_id'];
-	// 	$kode = $kd.''.$max_id;
-	// 	return $kode;
-	// }
-
-	function kode_jb(){
-		$kd = 'JB';
-		$query = $this->db->query("select IFNULL(MAX(substr(KODE_JABATAN, 3)),0)+1 as max_id from jabatan");
-		$row = $query->row_array();
-		$max_id = $row['max_id'];
-		$kode = $kd.''.$max_id;
-		return $kode;
-	}
-
-	function kode_dv(){
-		$kd = 'DV';
-		$query = $this->db->query("select IFNULL(MAX(substr(KODE_DIVISI, 3)),0)+1 as max_id from divisi");
-		$row = $query->row_array();
-		$max_id = $row['max_id'];
-		$kode = $kd.''.$max_id;
-		return $kode;
-	}
-
-	function kode_pg($id){
-		// $kd = 'PG';
-		// $query = $this->db->query("SELECT max(substr(NIP, 3, LENGTH(NIP)-2)+1) as max_id FROM pegawai");
-		// $row = $query->row_array();
-		// $max_id = $row['max_id'];
-		// $kode = $kd.''.$max_id;
-		// return $kode;
-
-		$query = $this->db->query("SELECT MAX(RIGHT(NIP,2))+1 AS idmax FROM pegawai where LEFT(NIP,3)='$id'");
-        $kd = "";
-        if($query->num_rows() > 0) {
-            foreach($query->result() as $value){
-                if ($value->idmax < 10 and $value->idmax != NULL){
-                	$kd = "0".$value->idmax;
-                } else if($value->idmax < 1) {
-                	$kd = "01";
-                }
-            }
-        } else {
-            $kd = "01";
-        }
-        return $id.$kd;
-	}
-
-	function kode_jd(){
-		$kd = 'JDK';
-		$query = $this->db->query("select IFNULL(MAX(substr(KODE_JENIS_DOKUMEN, 4)),0)+1 as max_id from jenis_dokumen");
-		$row = $query->row_array();
-		$max_id = $row['max_id'];
-		$kode = $kd.''.$max_id;
-		return $kode;
-	}
-
-	function kode_sd(){
-		$kd = 'SDK';
-		$query = $this->db->query("select IFNULL(MAX(substr(KODE_STATUS_DOKUMEN, 4)),0)+1 as max_id from status_dokumen");
-		$row = $query->row_array();
-		$max_id = $row['max_id'];
-		$kode = $kd.''.$max_id;
-		return $kode;
-	}
-
-	function kode_wp(){
-		$kd = 'WP';
-		$query = $this->db->query("select IFNULL(MAX(substr(KODE_WP, 3)),0)+1 as max_id from wajib_pajak");
-		$row = $query->row_array();
-		$max_id = $row['max_id'];
-		$kode = $kd.''.$max_id;
-		return $kode;
-	}
-
-	function kode_nwp(){
-		$kd = 'NWP';
-		$query = $this->db->query("select IFNULL(MAX(substr(KODE_NON_WP, 4)),0)+1 as max_id from non_wajib_pajak");
-		$row = $query->row_array();
-		$max_id = $row['max_id'];
-		$kode = $kd.''.$max_id;
-		return $kode;
-	}
-
-	// baca data tabel
+		// baca data tabel
 
 	function getUk()
 	{
@@ -518,7 +429,6 @@ class M_master extends CI_Model {
 		$this->db->where($where);
 		$this->db->delete('non_wajib_pajak');
 	}
-
 }
 
 /* End of file m_master.php */

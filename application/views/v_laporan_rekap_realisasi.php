@@ -5,7 +5,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Laporan Realisasi Alat Keterangan Pajak</title>
 
-    <link href="<?php echo base_url('/assets/css/jquery.dataTables.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
     
 	<style type="text/css" media="screen">

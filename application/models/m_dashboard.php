@@ -3,6 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class m_dashboard extends CI_Model {
 
+	public function getNotif($nip){
+		$y = $this->db->query("select kode_pemberitahuan, concat(count(*),' ',keterangan_mp) as dari, link_mp from pemberitahuan p join m_pemberitahuan m on p.keterangan_pemberitahuan = m.kode_mp join pegawai e on e.nip = p.asal_pemberitahuan join unit_kerja u on u.kode_unit_kerja = e.kode_unit_kerja where tujuan_pemberitahuan = '$nip' ")->result();
+		return $y;
+	}
+
+	public function getJumlahNotif($nip){
+		$y = $this->db->query("select count(*) as jml from pemberitahuan where status_pemberitahuan = 'belum' and tujuan_pemberitahuan = '$nip' ")->result();
+		return $y;
+	}
+
 	public function getRekap($lv,$uk,$dv,$nip){
 		if($lv == '0'){
 			$query = $this->db->query("SELECT KT.NAMA_UNIT_KERJA AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI
