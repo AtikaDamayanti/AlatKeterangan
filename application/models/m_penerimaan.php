@@ -166,6 +166,8 @@ class M_penerimaan extends CI_Model {
 		$this->db->where($where);
 		$this->db->update('alket',$data);
 
+
+		//jika mutasi ke WP
 		$npwp = $this->input->post('npwp_mutasi');
 		$ar = $this->input->post('ar_wp');
 		$kode = $this->input->post('kode');
@@ -182,29 +184,59 @@ class M_penerimaan extends CI_Model {
 			};
 		}
 
-		$id = gen_id(date("ymd"), 'pemberitahuan', 'kode_pembe ritahuan', 3);
-		$tujuan = $this->db->query("select nip, kode_unit_kerja from pegawai p join jabatan j on p.kode_jabatan = j.kode_jabatan join jabatan b on j.kode_jabatan = b.jabatan_induk where nip = '$nip' ")->result_array();
+		// tambah pemberitahuan untuk 3 atasan
+		$id = array();
+		$idd = array();
+		for($i = 1; $i <= 3; $i++){
+			$id[$i] = $this->db->query("select ifnull(max(substr(kode_pemberitahuan,7)),0)+".$i." as max_id from pemberitahuan")->result_array();
+			$idd[$i] = date('ymd').str_pad($id[$i][0]["max_id"],3,"0",STR_PAD_LEFT);
 
-		for ($i=0; $i < sizeOf($tujuan); $i++) { 
-			if($tujuan[$i]["kode_unit_kerja"] == '20001') {
-				$kp = 'MP03';
-			} else {
-				$kp = 'MP04';
-			}
-
-			$add_notif = array(
-			'kode_pemberitahuan' => $id,
-			'status_pemberitahuan' => 'belum',
-			'asal_pemberitahuan' => $nip,
-			'tujuan_pemberitahuan' => $tujuan[$i]["nip"],
-			'keterangan_pemberitahuan' => $kp 
-			);
-			$this->db->insert('pemberitahuan', $add_notif);
 		}
+		
+		$qkadiv = $this->db->query("select nip from pegawai where kode_jabatan = (select jabatan_induk
+			from pegawai p join jabatan j on p.kode_jabatan = j.kode_jabatan
+			where nip = '$nip')")->result_array();
 
+		$qkakpp = $this->db->query("select nip from pegawai where kode_jabatan = (select jabatan_induk
+			from pegawai g join jabatan b on g.kode_jabatan = b.kode_jabatan
+			where b.kode_jabatan = (select jabatan_induk
+			from pegawai p join jabatan j on p.kode_jabatan = j.kode_jabatan
+			where nip = '61105'))")->result_array();
 
+		$data = array (
+			array(
+				'kode_pemberitahuan' => $idd[1],
+				'status_pemberitahuan' => 'belum',
+				'asal_pemberitahuan' => $nip,
+				'tujuan_pemberitahuan' => $qkadiv[0]["nip"],
+				'keterangan_pemberitahuan' => 'MP04'	
+			),
+			array(
+				'kode_pemberitahuan' => $idd[2],
+				'status_pemberitahuan' => 'belum',
+				'asal_pemberitahuan' => $nip,
+				'tujuan_pemberitahuan' => $qkakpp[0]["nip"],
+				'keterangan_pemberitahuan' => 'MP04' 
+			),
+			array(
+				'kode_pemberitahuan' => $idd[3],
+				'status_pemberitahuan' => 'belum',
+				'asal_pemberitahuan' => $nip,
+				'tujuan_pemberitahuan' => '20001',
+				'keterangan_pemberitahuan' => 'MP03' 
+			)
+		);
+		$this->db->insert_batch('pemberitahuan', $data);
 	}
 
+	public function generate_id(){
+		for($i = 1; $i <= 3; $i++){
+			$id[$i] = $this->db->query("select ifnull(max(substr(kode_pemberitahuan,3)),0)+".$i." as max_id from pemberitahuan");
+		}
+		var_dump($id[0]);
+		var_dump($id[1]);
+		var_dump($id[2]);
+	}
 }
 
 /* End of file m_penerimaan.php */

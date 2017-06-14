@@ -9,6 +9,10 @@ class penerimaan extends CI_Controller {
         $this->load->helper('language', 'url', 'form');
     }
 
+    public function getid(){
+    	$this->penerimaan->generate_id();
+    }
+
 	public function index()
 	{
 		$uk = $this->session->userdata('unit_kerja');

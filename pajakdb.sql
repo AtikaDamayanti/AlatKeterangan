@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2017 at 04:37 PM
+-- Generation Time: Jun 14, 2017 at 01:31 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -28,30 +28,32 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `alket` (
   `NO_ALKET` varchar(10) NOT NULL,
-  `NIP` varchar(10) DEFAULT NULL,
-  `KODE_JENIS_DOKUMEN` varchar(10) DEFAULT NULL,
-  `KODE_WP` varchar(10) DEFAULT NULL,
-  `KODE_NON_WP` varchar(10) DEFAULT NULL,
-  `KODE_STATUS_DOKUMEN` varchar(10) DEFAULT NULL,
   `UNIT_KERJA_ASAL` varchar(10) DEFAULT NULL,
   `UNIT_KERJA_TUJUAN` varchar(10) DEFAULT NULL,
-  `TGL_KIRIM` date DEFAULT NULL,
-  `TGL_TERIMA` date DEFAULT NULL,
+  `KODE_WP` varchar(10) DEFAULT NULL,
+  `KODE_NON_WP` varchar(10) DEFAULT NULL,
+  `KODE_JENIS_DOKUMEN` varchar(10) DEFAULT NULL,
   `LEMBAR` int(11) DEFAULT NULL,
+  `KODE_STATUS_DOKUMEN` varchar(10) DEFAULT NULL,
   `NILAI_ALKET` int(11) DEFAULT NULL,
+  `TGL_KIRIM` datetime DEFAULT NULL,
+  `TGL_TERIMA` datetime DEFAULT NULL,
   `TGL_REALISASI` date DEFAULT NULL,
   `KETERANGAN` varchar(300) DEFAULT NULL,
+  `TGL_LAPORAN` datetime DEFAULT NULL,
   `NILAI_REALISASI` int(11) DEFAULT NULL,
   `DOKUMEN` varchar(50) DEFAULT NULL,
-  `TGL_LAPORAN` date DEFAULT NULL
+  `NIP` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `alket`
 --
 
-INSERT INTO `alket` (`NO_ALKET`, `NIP`, `KODE_JENIS_DOKUMEN`, `KODE_WP`, `KODE_NON_WP`, `KODE_STATUS_DOKUMEN`, `UNIT_KERJA_ASAL`, `UNIT_KERJA_TUJUAN`, `TGL_KIRIM`, `TGL_TERIMA`, `LEMBAR`, `NILAI_ALKET`, `TGL_REALISASI`, `KETERANGAN`, `NILAI_REALISASI`, `DOKUMEN`, `TGL_LAPORAN`) VALUES
-('AK001', NULL, 'JD001', 'WP001', NULL, 'SD001', '200', '611', '2017-06-01', NULL, 1, 1, NULL, NULL, NULL, 'Lighthouse.jpg', NULL);
+INSERT INTO `alket` (`NO_ALKET`, `UNIT_KERJA_ASAL`, `UNIT_KERJA_TUJUAN`, `KODE_WP`, `KODE_NON_WP`, `KODE_JENIS_DOKUMEN`, `LEMBAR`, `KODE_STATUS_DOKUMEN`, `NILAI_ALKET`, `TGL_KIRIM`, `TGL_TERIMA`, `TGL_REALISASI`, `KETERANGAN`, `TGL_LAPORAN`, `NILAI_REALISASI`, `DOKUMEN`, `NIP`) VALUES
+('AK001', '200', '611', 'WP001', NULL, 'JD001', 1, 'SD003', 1, '2017-06-01 00:00:00', '2017-06-05 11:00:29', '2017-06-06', '', '2017-06-05 12:27:41', 1000, 'Lighthouse.jpg', '61104'),
+('AK002', '200', '611', NULL, 'NW001', 'JD002', 1, 'SD004', 123, '2017-06-12 05:26:34', '2017-06-12 03:39:49', '2017-06-14', '', '2017-06-13 04:41:16', 22, 'kirim kanwil.PNG', '61105'),
+('AK003', '200', '611', NULL, 'NW001', 'JD002', 2, 'SD003', 10000, '2017-06-13 05:49:00', '2017-06-14 09:55:36', '0000-00-00', '', '2017-06-14 11:53:08', 444, 'tabel realisasi kpp.png', '61105');
 
 -- --------------------------------------------------------
 
@@ -65,8 +67,20 @@ CREATE TABLE `disposisi` (
   `PENGIRIM_DISPOSISI` varchar(10) DEFAULT NULL,
   `PENERIMA_DISPOSISI` varchar(10) DEFAULT NULL,
   `TGL_DISPOSISI` datetime DEFAULT NULL,
-  `KETERANGAN_DISPOSI` varchar(150) DEFAULT NULL
+  `KETERANGAN` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `disposisi`
+--
+
+INSERT INTO `disposisi` (`NO_DISPOSISI`, `NO_ALKET`, `PENGIRIM_DISPOSISI`, `PENERIMA_DISPOSISI`, `TGL_DISPOSISI`, `KETERANGAN`) VALUES
+(3, 'AK001', '61101', '61102', '2017-06-05 10:59:44', 'HMM'),
+(4, 'AK001', '61102', '61104', '2017-06-05 11:00:29', 'haaa'),
+(5, 'AK002', '61101', '61103', '2017-06-12 03:02:26', 'Besok yy'),
+(8, 'AK002', '61103', '61105', '2017-06-12 03:39:49', 'LUSA AJA GPP'),
+(9, 'AK003', '61101', '61103', '2017-06-14 09:55:15', 'ko'),
+(10, 'AK003', '61103', '61105', '2017-06-14 09:55:36', 'den');
 
 -- --------------------------------------------------------
 
@@ -137,6 +151,27 @@ INSERT INTO `jenis_dokumen` (`KODE_JENIS_DOKUMEN`, `NAMA_JENIS_DOKUMEN`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `m_pemberitahuan`
+--
+
+CREATE TABLE `m_pemberitahuan` (
+  `kode_mp` varchar(10) NOT NULL,
+  `keterangan_mp` varchar(50) NOT NULL,
+  `link_mp` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `m_pemberitahuan`
+--
+
+INSERT INTO `m_pemberitahuan` (`kode_mp`, `keterangan_mp`, `link_mp`) VALUES
+('MP02', 'Data Alat Keterangan Pajak Baru', 'penerimaan'),
+('MP03', 'Data Alat Keterangan Pajak Telah Direalisasi', 'pengiriman'),
+('MP04', 'Data Alat Keterangan Pajak Telah Direalisasi', 'penerimaan');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `non_wajib_pajak`
 --
 
@@ -178,12 +213,42 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`NIP`, `KODE_JABATAN`, `KODE_UNIT_KERJA`, `PASSWORD`, `NAMA_PEGAWAI`, `ALAMAT_PEGAWAI`, `TELP_PEGAWAI`, `EMAIL_PEGAWAI`, `FOTO_PEGAWAI`) VALUES
-('20001', 'JB001', '200', '12345', 'Ahmad Ali', 'Jl Kenjeran 105 Surabaya', '081285845955', '', NULL),
-('61101', 'JB002', '611', '26575', 'Baharudin Fajar', 'Jl Boscha 17', '087754326754', '', NULL),
-('61102', 'JB003', '611', '30654', 'Cindy Amalia', 'Perum Pluit Indah', '087965438897', '', NULL),
-('61103', 'JB004', '611', '56743', 'Ciko Saputra', 'Jl Juanda X/45', '08765439907', NULL, NULL),
-('61104', 'JB005', '611', '64538', 'Dinda Amelia', 'Jl Arjuna Gg V/12', '081264739578', NULL, NULL),
-('61105', 'JB006', '611', '45676', 'Deni Darko', 'Komp Al Azhar Bintaro', '086473467992', NULL, NULL);
+('20001', 'JB001', '200', '12345', 'Ahmad Ali', 'Jl Kenjeran 105 Surabaya', '081285845955', '', 'man.png'),
+('61101', 'JB002', '611', '26575', 'Baharudin Fajar', 'Jl Boscha 17', '087754326754', '', 'men.png'),
+('61102', 'JB003', '611', '30654', 'Cindy Amalia', 'Perum Pluit Indah', '087965438897', '', 'min.png'),
+('61103', 'JB004', '611', '56743', 'Ciko Saputra', 'Jl Juanda X/45', '08765439907', NULL, 'pap.png'),
+('61104', 'JB005', '611', '64538', 'Dinda Amelia', 'Jl Arjuna Gg V/12', '081264739578', NULL, 'pep.png'),
+('61105', 'JB006', '611', '45676', 'Deni Darko', 'Komp Al Azhar Bintaro', '086473467992', NULL, 'pip.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pemberitahuan`
+--
+
+CREATE TABLE `pemberitahuan` (
+  `kode_pemberitahuan` varchar(10) NOT NULL,
+  `status_pemberitahuan` varchar(20) NOT NULL,
+  `asal_pemberitahuan` varchar(10) NOT NULL,
+  `tujuan_pemberitahuan` varchar(10) NOT NULL,
+  `keterangan_pemberitahuan` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pemberitahuan`
+--
+
+INSERT INTO `pemberitahuan` (`kode_pemberitahuan`, `status_pemberitahuan`, `asal_pemberitahuan`, `tujuan_pemberitahuan`, `keterangan_pemberitahuan`) VALUES
+('', 'belum', '61105', '61103', 'MP04'),
+('170612001', 'sudah', '20001', '61101', 'MP02'),
+('170612002', 'sudah', '61101', '61103', 'MP02'),
+('170612003', 'sudah', '61103', '61105', 'MP02'),
+('170613004', 'belum', '20001', '61101', 'MP02'),
+('170614005', 'belum', '61101', '61103', 'MP02'),
+('170614006', 'belum', '61103', '61105', 'MP02'),
+('170614007', 'belum', '61105', '61103', 'MP04'),
+('170614008', 'belum', '61105', '61101', 'MP04'),
+('170614009', 'sudah', '61105', '20001', 'MP03');
 
 -- --------------------------------------------------------
 
@@ -247,7 +312,9 @@ CREATE TABLE `wajib_pajak` (
 --
 
 INSERT INTO `wajib_pajak` (`KODE_WP`, `AR`, `NPWP`, `NAMA_WP`, `ALAMAT_WP`, `TELP_WP`) VALUES
-('WP001', NULL, '123.456.789-0.111', 'Livana', 'Jl Margonda Raya ', 'Depok');
+('WP001', '61104', '123.456.789-0.111', 'Livana', 'Jl Margonda Raya Depok', '08765485968'),
+('WP2', '61105', '12.456.890.0-770.073', 'Kevin Julio', 'Jl Pahlawan 102', '081277884456'),
+('WP3', '61105', '56.525.525.5-525.222', 'Kevin Julio', 'Jl Pahlawan 102', '081277884456');
 
 --
 -- Indexes for dumped tables
@@ -296,6 +363,12 @@ ALTER TABLE `jenis_dokumen`
   ADD PRIMARY KEY (`KODE_JENIS_DOKUMEN`);
 
 --
+-- Indexes for table `m_pemberitahuan`
+--
+ALTER TABLE `m_pemberitahuan`
+  ADD PRIMARY KEY (`kode_mp`);
+
+--
 -- Indexes for table `non_wajib_pajak`
 --
 ALTER TABLE `non_wajib_pajak`
@@ -308,6 +381,12 @@ ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`NIP`),
   ADD KEY `FK_BERTEMPAT` (`KODE_UNIT_KERJA`),
   ADD KEY `FK_MENJABAT` (`KODE_JABATAN`);
+
+--
+-- Indexes for table `pemberitahuan`
+--
+ALTER TABLE `pemberitahuan`
+  ADD PRIMARY KEY (`kode_pemberitahuan`);
 
 --
 -- Indexes for table `status_dokumen`
@@ -328,6 +407,15 @@ ALTER TABLE `wajib_pajak`
   ADD PRIMARY KEY (`KODE_WP`),
   ADD KEY `FK_MEMBAWAHI` (`AR`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `disposisi`
+--
+ALTER TABLE `disposisi`
+  MODIFY `NO_DISPOSISI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --

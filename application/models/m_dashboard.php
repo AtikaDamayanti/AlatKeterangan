@@ -13,6 +13,17 @@ class m_dashboard extends CI_Model {
 		return $y;
 	}
 
+	public function update_notif($id){
+		$where = array(
+				'kode_pemberitahuan' => $id
+				);
+		$data = array(
+				'status_pemberitahuan' => 'sudah'
+				);
+		$this->db->where($where);
+		$this->db->update('pemberitahuan', $data);
+	}
+
 	public function getRekap($lv,$uk,$dv,$nip){
 		if($lv == '0'){
 			$query = $this->db->query("SELECT KT.NAMA_UNIT_KERJA AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI

@@ -70,7 +70,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Keterangan</label>
-                                                    <textarea id="keterangan" class="form-control"></textarea>
+                                                    <textarea id="keterangan" name="keterangan" class="form-control"></textarea>
                                                 </div>
                                             </form>
                                         </div>
@@ -260,7 +260,7 @@
 
                                         <div class="form-group">
                                             <label>Tanggal Realisasi</label>
-                                            <input type="date" class="form-control" id="tgl_real" required>
+                                            <input type="text" class="form-control datepicker" id="tgl_real" required>
                                         </div>
 
                                         <div class="form-group">
@@ -310,6 +310,16 @@
                         <script type="text/javascript">
                             $(document).ready(function() {
                                 
+                                //datepicker
+                                $('.datepicker').datepicker({
+                                    autoclose: true,
+                                    format: "yyyy-mm-dd",
+                                    todayHighlight: true,
+                                    orientation: "top auto",
+                                    todayBtn: true,
+                                    todayHighlight: true,  
+                                });
+
                                 $("#npwp_mutasi").hide();
                                 $("#ar_wp").hide();
 

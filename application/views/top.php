@@ -30,7 +30,8 @@
 
     <link href="<?php echo base_url('/assets/css/buttons.dataTables.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/css/jquery.dataTables.min.css'); ?>" rel="stylesheet">
-
+    <link href="<?php echo base_url('assets/dp/css/bootstrap-datepicker3.min.css')?>" rel="stylesheet">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <style type="text/css">
         .center {
             float: none;
@@ -117,13 +118,12 @@
                         $.ajax({
                             url : "<?php echo site_url('dashboard/updateNotif/'); ?>/" + id,
                             type : "POST",
-                            data : id,
                             success : function(data) {
                                 return data;
                             },
                             error: function (jqXHR, textStatus, errorThrown)
                             {
-                                alert('Masalah saat mengambil data');
+                                alert('Update');
                             }
                         });
                     }

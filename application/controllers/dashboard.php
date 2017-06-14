@@ -33,7 +33,7 @@ class dashboard extends CI_Controller {
 	}
 
 	public function updateNotif($id){
-		$this->dashboard->update_notif();
+		$this->dashboard->update_notif($id);
 	}
 
 	public function dataRekap(){

@@ -12,7 +12,7 @@ class pengiriman extends CI_Controller {
     public function index()
 	{
 		//ambil kode
-		$data['kode_ak'] = gen_id('AK', 'alket', 'NO_ALKET', 3);
+		$data['kode_ak'] = gen_id('AK', 'alket', 'NO_ALKET', 3,3);
 
 		//ambil combobox
 		$data['cb_jd'] = $this->pengiriman->cb_jd();

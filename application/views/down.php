@@ -1,3 +1,4 @@
+<script src="<?php echo base_url('assets/dp/js/bootstrap-datepicker.min.js')?>"></script>
     <script src="<?php echo base_url('/assets/js/jquery-migrate-1.2.1.min.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
@@ -20,6 +21,8 @@
     <script src="<?php echo base_url('/assets/js/buttons.print.min.js') ?>"></script>
     <script src="<?php echo base_url('/assets/js/pdfmake.min.js') ?>"></script>
     <script src="<?php echo base_url('/assets/js/select2.min.js')?>"></script>
+
+
 
 </body>
 </html>
