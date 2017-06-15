@@ -27,8 +27,10 @@ class pengiriman extends CI_Controller {
 	public function dataAk(){
 	    $result = $this->pengiriman->getAk();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->NO_ALKET;
 	    	$row[] = $value->UK_ASAL;
 	    	$row[] = $value->UK_TUJUAN;
@@ -42,6 +44,7 @@ class pengiriman extends CI_Controller {
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Ubah" onclick="edit_ak('."'".$value->NO_ALKET."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_ak('."'".$value->NO_ALKET."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 			$data[] = $row;
+			$no++;
 	    }
 	    echo json_encode(['data' => $data]);
 	}
@@ -49,13 +52,16 @@ class pengiriman extends CI_Controller {
 	public function dataTrm(){
 		$result = $this->pengiriman->getTrm();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->NAMA_UNIT_KERJA;
 	    	$row[] = $value->NO_ALKET;
 	    	$row[] = $value->TGL_KIRIM;
 	    	$row[] = $value->TGL_TERIMA;
 	    	$data[] = $row;
+	    	$no++;
 		}
 		echo json_encode(['data' => $data]);
 	}
@@ -63,14 +69,17 @@ class pengiriman extends CI_Controller {
 	public function dataDps(){
 		$result = $this->pengiriman->getDps();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+		    $row[] = $no;
 	    	$row[] = $value->uk_tujuan;
 	    	$row[] = $value->dari;
 	    	$row[] = $value->kepada;
 	    	$row[] = $value->no_alket;
 	    	$row[] = $value->tgl_disposisi;
 	    	$data[] = $row;
+	    	$no++;
 		}
 		echo json_encode(['data' => $data]);
 	}
@@ -78,8 +87,10 @@ class pengiriman extends CI_Controller {
 	public function dataRls(){
 		$result = $this->pengiriman->getRls();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->NAMA_UNIT_KERJA;
 	    	$row[] = $value->NO_ALKET;
 	    	$row[] = $value->TGL_KIRIM;
@@ -88,7 +99,10 @@ class pengiriman extends CI_Controller {
 	    	$row[] = $value->NILAI_ALKET;
 	    	$row[] = $value->NILAI_REALISASI;
 	    	$row[] = $value->SELISIH_NILAI;
+	    	$row[] = '<a class="btn btn-sm btn-success" title="Cetak" href='.site_url().'/penerimaan/cetak/'.$value->NO_ALKET.'>
+	    					<i class="glyphicon glyphicon-print"></i> Cetak</a>';
 	    	$data[] = $row;
+	    	$no++;
 		}
 		echo json_encode(['data' => $data]);
 	}

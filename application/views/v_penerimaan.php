@@ -31,6 +31,7 @@
                             <table class="display nowrap" id="tbl_trm" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>No Alket</th>
                                         <th>Status</th>
                                         <th>Tanggal Terima</th>
@@ -39,6 +40,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>No</th>
                                         <th>No Alket</th>
                                         <th>Status</th>
                                         <th>Tanggal Terima</th>
@@ -89,7 +91,7 @@
                                 $('#tbl_trm').DataTable({
                                     "dom" : 'Bfrtip',
                                     "buttons" : [
-                                    'copy', 'excel', 'print'
+                                    'copy', 'excel'
                                     ],
                                     "ajax": "<?php echo base_url('index.php/penerimaan/dataTrm'); ?>",
                                 });
@@ -148,7 +150,9 @@
                             </p>
                             <!-- Tabel -->
                             <table class="display nowrap" id="tbl_drls" cellspacing="0" width="100%">
-                                <thead>                                    <tr>
+                                <thead>                                    
+                                    <tr>
+                                        <th>No</th>
                                         <th>No Alket</th>
                                         <th>Kode Status</th>
                                         <th>Nilai Alket</th>
@@ -160,6 +164,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>No</th>
                                         <th>No Alket</th>
                                         <th>Kode Status</th>
                                         <th>Nilai Alket</th>
@@ -177,7 +182,7 @@
                                 $('#tbl_drls').DataTable({
                                     "dom" : 'Bfrtip',
                                     "buttons" : [
-                                    'copy', 'excel', 'print'
+                                    'copy', 'excel'
                                     ],
                                     "ajax": "<?php echo base_url('index.php/penerimaan/dataRls/'); ?>",
                                 });
@@ -258,9 +263,11 @@
                                         <input type="text" class="form-control" id="noalket" disabled>
                                         <input type="text" class="form-control" id="kode" disabled>
 
+                                        <input type="text" class="form-control" name="tgl_terima" id="tgl_terima">
+
                                         <div class="form-group">
                                             <label>Tanggal Realisasi</label>
-                                            <input type="text" class="form-control datepicker" id="tgl_real" required>
+                                            <input type="text" class="form-control datepicker" data-date-format="dd/mm/yyyy" id="tgl_real" name="tgl_real" required>
                                         </div>
 
                                         <div class="form-group">
@@ -309,16 +316,6 @@
                         </div> 
                         <script type="text/javascript">
                             $(document).ready(function() {
-                                
-                                //datepicker
-                                $('.datepicker').datepicker({
-                                    autoclose: true,
-                                    format: "yyyy-mm-dd",
-                                    todayHighlight: true,
-                                    orientation: "top auto",
-                                    todayBtn: true,
-                                    todayHighlight: true,  
-                                });
 
                                 $("#npwp_mutasi").hide();
                                 $("#ar_wp").hide();
@@ -346,9 +343,17 @@
                                     {
                                         $("#noalket").val(data[0].NO_ALKET);
                                         $("#kode").val(data[0].KODE);
+                                        $("#tgl_terima").val(data[0].TGL_TERIMA);
                                         $('#modal_rls').modal('show');
                                         $('.modal-title').text('Disposisi Alat Keterangan Pajak');
                                     }
+
+                                });
+                                $('.datepicker').datepicker({
+                                    autoclose: true,
+                                    Format: "dd/mm/yyyy",
+                                    orientation: "top auto",
+                                    startDate: "data[0].TGL_TERIMA"       
                                 });
                             };
 

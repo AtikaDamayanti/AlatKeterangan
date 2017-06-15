@@ -83,12 +83,8 @@ class M_pengiriman extends CI_Model {
 	public function getRls(){
 		$query = $this->db->query("select NAMA_UNIT_KERJA, NO_ALKET, TGL_KIRIM, TGL_LAPORAN, (TGL_LAPORAN-TGL_KIRIM) AS SELISIH_WAKTU, NILAI_ALKET, NILAI_REALISASI, (NILAI_REALISASI-NILAI_ALKET) AS SELISIH_NILAI
 			from alket a
-			JOIN WAJIB_PAJAK W ON A.KODE_WP = W.KODE_WP
 			JOIN UNIT_KERJA K on A.UNIT_KERJA_TUJUAN = K.KODE_UNIT_KERJA 
-			JOIN PEGAWAI P ON P.NIP = W.AR 
-			JOIN JABATAN J ON J.KODE_JABATAN = P.KODE_JABATAN 
-			JOIN DIVISI D ON D.KODE_DIVISI = J.KODE_DIVISI
-			where tgl_realisasi != '0000-00-00 00:00:00'");
+			where NILAI_REALISASI is not null");
         return $query->result();
 	}
 

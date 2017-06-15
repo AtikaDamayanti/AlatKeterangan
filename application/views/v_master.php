@@ -41,6 +41,7 @@
                             <table class="display nowrap" id="tbl_uk" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Kode</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
@@ -49,6 +50,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>No</th>
                                         <th>Kode</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
@@ -99,7 +101,7 @@
                                 $('#tbl_uk').DataTable({
                                     "dom" : 'Bfrtip',
                                     "buttons" : [
-                                    'copy', 'excel', 'print'
+                                    'copy', 'excel'
                                     ],
                                     "ajax": "<?php echo base_url('index.php/master/dataUk'); ?>",
                                 });
@@ -193,6 +195,7 @@ function submit_uk(){
     <table class="display nowrap" id="tbl_dv" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Aksi</th>
@@ -200,6 +203,7 @@ function submit_uk(){
         </thead>
         <tfoot>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Aksi</th>
@@ -244,7 +248,7 @@ function submit_uk(){
         $('#tbl_dv').DataTable({
             "dom" : 'Bfrtip',
             "buttons" : [
-            'copy', 'excel', 'print'
+            'copy', 'excel'
             ],
             "ajax": "<?php echo base_url('index.php/master/dataDv'); ?>",
         });
@@ -334,6 +338,7 @@ function submit_uk(){
     <table class="display nowrap" id="tbl_jb" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Jabatan Induk</th>
@@ -344,6 +349,7 @@ function submit_uk(){
         </thead>
         <tfoot>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Jabatan Induk</th>
@@ -426,7 +432,7 @@ function submit_uk(){
         $('#tbl_jb').DataTable({
             "dom" : 'Bfrtip',
             "buttons" : [
-            'copy', 'excel', 'print'
+            'copy', 'excel'
             ],
             "ajax": "<?php echo base_url('index.php/master/dataJb'); ?>"
         });
@@ -524,6 +530,7 @@ function submit_uk(){
    <table class="display nowrap" id="tgl_pg" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>NIP</th>
                 <th>Jabatan</th>
                 <th>Nama</th>
@@ -535,6 +542,7 @@ function submit_uk(){
         </thead>
         <tfoot>
             <tr>
+                <th>No</th>
                 <th>NIP</th>
                 <th>Jabatan</th>
                 <th>Nama</th>
@@ -625,7 +633,7 @@ function submit_uk(){
         $('#tgl_pg').DataTable({
             "dom" : 'Bfrtip',
             "buttons" : [
-            'copy', 'excel', 'print'
+            'copy', 'excel'
             ],
             "ajax": "<?php echo base_url('index.php/master/dataPg'); ?>"
         });
@@ -742,6 +750,7 @@ function submit_uk(){
     <table class="display nowrap" id="tbl_jd" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Aksi</th>
@@ -749,6 +758,7 @@ function submit_uk(){
         </thead>
         <tfoot>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Aksi</th>
@@ -791,7 +801,7 @@ function submit_uk(){
         $('#tbl_jd').DataTable({
             "dom" : 'Bfrtip',
             "buttons" : [
-            'copy', 'excel', 'print'
+            'copy', 'excel'
             ],
             "ajax": "<?php echo base_url('index.php/master/dataJd'); ?>"
         });
@@ -880,6 +890,7 @@ function submit_uk(){
     <table class="display nowrap" id="tbl_sd" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Aksi</th>
@@ -887,6 +898,7 @@ function submit_uk(){
         </thead>
         <tfoot>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Aksi</th>
@@ -929,7 +941,7 @@ function submit_uk(){
         $('#tbl_sd').DataTable({
             "dom" : 'Bfrtip',
             "buttons" : [
-            'copy', 'excel', 'print'
+            'copy', 'excel'
             ],
             "ajax": "<?php echo base_url('index.php/master/dataSd'); ?>"
         });
@@ -1018,6 +1030,7 @@ function submit_uk(){
     <table class="display nowrap" id="tbl_wp" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>NPWP</th>
                 <th>Nama</th>
@@ -1029,6 +1042,7 @@ function submit_uk(){
         </thead>
         <tfoot>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>NPWP</th>
                 <th>Nama</th>
@@ -1101,7 +1115,7 @@ function submit_uk(){
         $('#tbl_wp').DataTable({
             "dom" : 'Bfrtip',
             "buttons" : [
-            'copy', 'excel', 'print'
+            'copy', 'excel'
             ],
             "ajax": "<?php echo base_url('index.php/master/dataWp'); ?>",
         });
@@ -1198,6 +1212,7 @@ function submit_uk(){
     <table class="display nowrap" id="tbl_nwp" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Alamat</th>
@@ -1208,6 +1223,7 @@ function submit_uk(){
         </thead>
         <tfoot>
             <tr>
+                <th>No</th>
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Alamat</th>
@@ -1274,7 +1290,7 @@ function submit_uk(){
         $('#tbl_nwp').DataTable({
             "dom" : 'Bfrtip',
             "buttons" : [
-            'copy', 'excel', 'print'
+            'copy', 'excel'
             ],
             "ajax": "<?php echo base_url('index.php/master/dataNwp'); ?>"
         });

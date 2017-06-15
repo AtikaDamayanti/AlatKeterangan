@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Laporan Realisasi Alat Keterangan Pajak</title>
+	<title>Laporan Rekapitulasi Alat Keterangan Pajak</title>
     
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
 	<style type="text/css" media="screen">
@@ -84,7 +84,7 @@
 </head>
 <body>
 <page size="A4">
-<?php foreach ($detil as $value) { ?>
+<?php foreach ($a as $value) { ?>
 	<table border="0" align="center" class="atas">
 		<tr>
 			<td rowspan="9" width="120" class="td-header">
@@ -116,96 +116,35 @@
 	</table>
 	<hr>
 	
-	<table border="0" class="kepada">
-		<tr>
-			<td width="100px">Nomor</td>
-			<td width="10px"> : </td>
-			<td width="400px">Isi</td>
-			<td><?php 
-				$tanggal= mktime(date("m"),date("d"),date("Y"));
-				echo date("d M Y", $tanggal);
-				date_default_timezone_set('Asia/Jakarta');
-				?>
-			</td>
-		</tr>
-		<tr>
-			<td width="100px">Sifat</td>
-			<td width="10px"> : </td>
-			<td width="400px">Rahasia</td>
-		</tr>
-		<tr>
-			<td width="100px">Perihal</td>
-			<td width="10px"> : </td>
-			<td width="400px">Laporan Realisasi Alat Keterangan Pajak</td>
-		</tr>
-		<tr height="30px">
-		</tr>
-		<tr>
-			<td>Kepada Yth.</td>
-		</tr>
-		<tr>
-			<td colspan="3"><?php echo $value->tujuan ?></td>
-		</tr>
-		<tr>
-			<td colspan="3"><?php echo $value->alamat_tujuan ?></td>
-		</tr>
-		<tr height="30px">
-		</tr>
-	</table>
-
 	<table width="650px" class="table-hovered table-bordered isi">
 		<tr>
-			<td>No Alket</td>
-			<td><?php echo $value->NO_ALKET; ?></td>
+			<th>Nama Unit Kerja</th>
+			<th>∑ Data Alket</th>
+			<th>∑ Nilai Alket</th>
+			<th>∑ Data Realisasi</th>
+            <th>∑ Nilai Realisasi</th>
+			<th>∑ Belum Realisasi</th>
 		</tr>
+		<?php foreach ($b as $key) { ?>
 		<tr>
-			<td>Kode WP / Non WP</td>
-			<td><?php echo $value->kode_p; ?></td>
+			
+			<td><?php echo $key->NAMA_UNIT ?></td>
+			<td><?php echo $key->JUMLAH_DATA_ALKET ?></td>
+			<td><?php $angka1 = $key->JUMLAH_NILAI_ALKET; 
+					$ang = number_format($angka1, "2", ",", ".");
+					echo $ang;
+						?></td>
+			<td><?php echo $key->JUMLAH_DATA_REALISASI ?></td>
+            <td><?php echo $angka2 = $key->JUMLAH_NILAI_REALISASI; 
+            		$ka = number_format($angka2, "2", ",", ".");
+					echo $ka;
+            ?></td>
+			<td><?php echo $key->JUMLAH_BELUM_REALISASI ?></td>
 		</tr>
-		<tr>
-			<td>Nama WP / Non WP</td>
-			<td><?php echo $value->nama_p; ?></td>
-		</tr>
-		<tr>
-			<td>Jenis Dokumen</td>
-			<td><?php echo $value->nama_jenis_dokumen; ?></td>
-		</tr>
-		<tr>
-			<td>Tgl Kirim</td>
-			<td><?php echo $value->tgl_kirim; ?></td>
-		</tr>
-		<tr>
-			<td>Tgl Terima</td>
-			<td><?php echo $value->tgl_terima; ?></td>
-		</tr>
-		<tr>
-			<td>Tgl Realisasi</td>
-			<td><?php echo $value->tgl_realisasi; ?></td>
-		</tr>
-		<tr>
-			<td>Tgl Laporan</td>
-			<td><?php echo $value->tgl_laporan; ?></td>
-		</tr>
-		<tr>
-			<td>Nilai Alket</td>
-			<td><?php echo $value->nilai_alket; ?></td>
-		</tr>
-		<tr>
-			<td>Nilai Realisasi</td>
-			<td><?php echo $value->nilai_realisasi; ?></td>
-		</tr>
-		<tr>
-			<td>Status Dokumen</td>
-			<td><?php echo $value->nama_status_dokumen; ?></td>
-		</tr>
-		<tr>
-			<td>Account Representative</td>
-			<td><?php echo $value->nama_pegawai; ?></td>
-		</tr>
-		<tr>
-			<td>Selisih</td>
-			<td><?php echo $value->selisih; ?></td>
-		</tr>
+		<?php } ?>
+	</table>
+
+	<table>
 		
 	</table>
 	<?php } ?>

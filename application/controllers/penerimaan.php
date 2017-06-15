@@ -57,13 +57,16 @@ class penerimaan extends CI_Controller {
 
 		$result = $this->penerimaan->getTrm($uk, $lv, $dv, $nip);
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->NO_ALKET;
 	    	$row[] = $value->STATUS;
 	    	$row[] = $value->TGL_KIRIM;
 	    	$row[] = '<a class="btn btn-sm btn-success" href="javascript:void(0)" title="Terima" onclick="add_trm('."'".$value->NO_ALKET."'".')"><i class="glyphicon glyphicon-pencil"></i> Terima</a>'; 
 	    	$data[] = $row;
+	    	$no++;
 		}
 		echo json_encode(['data' => $data]);
 	}
@@ -77,8 +80,10 @@ class penerimaan extends CI_Controller {
 
 		$result = $this->penerimaan->getRls($nip, $uk, $dv, $lv);
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->NO_ALKET;
 	    	$row[] = $value->STATUS;
 	    	$row[] = $value->NILAI_ALKET;
@@ -93,6 +98,7 @@ class penerimaan extends CI_Controller {
 	    		$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Realisasi" onclick="add_rls('."'".$value->NO_ALKET."'".')"><i class="glyphicon glyphicon-pencil"></i> Realisasi</a>';
 	    	}
 	    	$data[] = $row;
+	    	$no++;
 		}
 		echo json_encode(['data' => $data]);	
 	}

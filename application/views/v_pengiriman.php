@@ -37,6 +37,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>No Alket</th>
                                         <th>Asal</th>
                                         <th>Tujuan</th>
                                         <th>Kode</th>
@@ -52,6 +53,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
+                                        <th>No Alket</th>
                                         <th>Asal</th>
                                         <th>Tujuan</th>
                                         <th>Kode</th>
@@ -210,7 +212,7 @@
                 $('#tbl_ak').DataTable({
                     "dom" : 'Bfrtip',
                     "buttons" : [
-                    'copy', 'excel', 'print'
+                    'copy', 'excel'
                     ],
                     "ajax": "<?php echo base_url('index.php/pengiriman/dataAk'); ?>",
                 });
@@ -309,6 +311,7 @@
                             <table class="display nowrap" id="tbl_trm" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Tujuan</th>
                                         <th>No Alket</th>
                                         <th>Tanggal Kirim</th>
@@ -317,6 +320,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>No</th>
                                         <th>Tujuan</th>
                                         <th>No Alket</th>
                                         <th>Tanggal Kirim</th>
@@ -332,7 +336,7 @@
                                     $('#tbl_trm').DataTable({
                                         "dom" : 'Bfrtip',
                                         "buttons" : [
-                                        'copy', 'excel', 'print'
+                                        'copy', 'excel'
                                         ],
                                         "ajax": "<?php echo base_url('index.php/pengiriman/dataTrm'); ?>",
                                     });
@@ -356,6 +360,7 @@
                             <table class="display nowrap" id="tbl_dps" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>KPP Tujuan</th>
                                         <th>Dari</th>
                                         <th>Untuk</th>
@@ -365,6 +370,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>No</th>
                                         <th>KPP Tujuan</th>
                                         <th>Dari</th>
                                         <th>Untuk</th>
@@ -381,7 +387,7 @@
                                     $('#tbl_dps').DataTable({
                                         "dom" : 'Bfrtip',
                                         "buttons" : [
-                                        'copy', 'excel', 'print'
+                                        'copy', 'excel'
                                         ],
                                         "ajax": "<?php echo base_url('index.php/pengiriman/dataDps'); ?>",
                                     });
@@ -404,6 +410,7 @@
                             <table class="display nowrap" id="tbl_rls" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>KPP</th>
                                         <th>No Alket</th>
                                         <th>Tanggal Kirim</th>
@@ -412,10 +419,12 @@
                                         <th>Nilai Alket</th>
                                         <th>Nilai Realisasi</th>
                                         <th>Selisih Nilai</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>No</th>
                                         <th>KPP</th>
                                         <th>No Alket</th>
                                         <th>Tanggal Kirim</th>
@@ -424,6 +433,7 @@
                                         <th>Nilai Alket</th>
                                         <th>Nilai Realisasi</th>
                                         <th>Selisih Nilai</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -435,7 +445,7 @@
                                     $('#tbl_rls').DataTable({
                                         "dom" : 'Bfrtip',
                                         "buttons" : [
-                                        'copy', 'excel', 'print'
+                                        'copy', 'excel'
                                         ],
                                         "ajax": "<?php echo base_url('index.php/pengiriman/dataRls'); ?>",
                                     });

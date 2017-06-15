@@ -11,24 +11,30 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Laporan Dan Rekapitulasi Alat Keterangan Pajak</div>
                 <div class="panel-body">
+                <a class="btn btn-sm btn-primary" title="Cetak" href='dashboard/cetak/'><i class="glyphicon glyphicon-print"></i> Cetak</a>
+                <p></p>
                 	<div class="table-responsive">
                 	<table class="display nowrap" id="tbl_rekap" cellspacing="0" width="100%">
 					<thead>
 						<tr>
+                            <th>No</th>
 							<th>Nama Unit Kerja</th>
 							<th>∑ Data Alket</th>
 							<th>∑ Nilai Alket</th>
 							<th>∑ Data Realisasi</th>
-							<th>∑ Nilai Realisasi</th>
+                            <th>∑ Nilai Realisasi</th>
+							<th>∑ Belum Realisasi</th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
+                            <th>No</th>
 							<th>Nama Unit Kerja</th>
 							<th>∑ Data Alket</th>
 							<th>∑ Nilai Alket</th>
 							<th>∑ Data Realisasi</th>
-							<th>∑ Nilai Realisasi</th>
+                            <th>∑ Nilai Realisasi</th>
+							<th>∑ Belum Realisasi</th>
 						</tr>
 					</tfoot>
 					</table>
@@ -38,7 +44,7 @@
                             $('#tbl_rekap').DataTable({
                                 "dom" : 'Bfrtip',
                                 "buttons" : [
-                                'copy', 'excel', 'print'
+                                'copy', 'excel'
                                 ],
                                 "ajax": "<?php echo base_url('index.php/dashboard/dataRekap'); ?>",
                             });
@@ -75,8 +81,8 @@
                     element: 'morris-bar-chart',
                     data : data, 
                     xkey: 'NAMA_UNIT',
-                    ykeys: ['JUMLAH_DATA_ALKET', 'JUMLAH_DATA_REALISASI'],
-                    labels: ['BELUM REALISASI', 'REALISASI'],
+                    ykeys: ['JUMLAH_DATA_ALKET','JUMLAH_DATA_REALISASI', 'JUMLAH_BELUM_REALISASI'],
+                    labels: ['JUMLAH','REALISASI', 'BELUM REALISASI'],
                     hideHover: 'auto',
                     resize: true
                 });

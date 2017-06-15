@@ -27,11 +27,13 @@
     <link href="<?php echo base_url('assets/css/morris.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url('assets/css/select2.min.css') ?>" rel="stylesheet" />
-
     <link href="<?php echo base_url('/assets/css/buttons.dataTables.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('/assets/css/jquery.dataTables.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/dp/css/bootstrap-datepicker3.min.css')?>" rel="stylesheet">
- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+   
+    <script src="<?php echo base_url('assets/js/jquery-1.12.4.js'); ?>"></script>
+
+
     <style type="text/css">
         .center {
             float: none;

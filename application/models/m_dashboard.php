@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class m_dashboard extends CI_Model {
 
 	public function getNotif($nip){
-		$y = $this->db->query("select kode_pemberitahuan, concat(count(*),' ',keterangan_mp) as dari, link_mp from pemberitahuan p join m_pemberitahuan m on p.keterangan_pemberitahuan = m.kode_mp join pegawai e on e.nip = p.asal_pemberitahuan join unit_kerja u on u.kode_unit_kerja = e.kode_unit_kerja where tujuan_pemberitahuan = '$nip' ")->result();
+		$y = $this->db->query("select kode_pemberitahuan, concat(count(*),' ',keterangan_mp) as dari, link_mp, status_pemberitahuan from pemberitahuan p join m_pemberitahuan m on p.keterangan_pemberitahuan = m.kode_mp join pegawai e on e.nip = p.asal_pemberitahuan join unit_kerja u on u.kode_unit_kerja = e.kode_unit_kerja where tujuan_pemberitahuan = '61103' group by keterangan_pemberitahuan")->result();
 		return $y;
 	}
 
@@ -26,12 +26,12 @@ class m_dashboard extends CI_Model {
 
 	public function getRekap($lv,$uk,$dv,$nip){
 		if($lv == '0'){
-			$query = $this->db->query("SELECT KT.NAMA_UNIT_KERJA AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI
+			$query = $this->db->query("SELECT CONCAT(REPLACE(LEFT(KT.NAMA_UNIT_KERJA,31), 'Kantor Pelayanan Pajak Pratama','KPPP'), SUBSTR(NAMA_UNIT_KERJA,31)) AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI, (SELECT COUNT(NILAI_REALISASI) FROM ALKET WHERE NILAI_REALISASI IS NULL) AS JUMLAH_BELUM_REALISASI
 				FROM alket A RIGHT JOIN unit_kerja KT ON a.UNIT_KERJA_TUJUAN = KT.KODE_UNIT_KERJA
 				WHERE KT.KODE_UNIT_KERJA NOT IN ('200')
 				GROUP BY KT.NAMA_UNIT_KERJA");
 		} else if ($lv == '1'){
-			$query = $this->db->query("SELECT NAMA_DIVISI AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI
+			$query = $this->db->query("SELECT NAMA_DIVISI AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI, (SELECT COUNT(NILAI_REALISASI) FROM ALKET WHERE NILAI_REALISASI IS NULL) AS JUMLAH_BELUM_REALISASI
 				FROM DIVISI D JOIN JABATAN J ON J.KODE_DIVISI = D.KODE_DIVISI
 				JOIN JABATAN JB ON JB.JABATAN_INDUK = J.KODE_JABATAN
 				JOIN PEGAWAI P ON P.KODE_JABATAN = J.KODE_JABATAN
@@ -41,7 +41,7 @@ class m_dashboard extends CI_Model {
 				WHERE NAMA_UNIT_KERJA LIKE '%$uk%'
 				GROUP BY NAMA_DIVISI");
 		} else if ($lv == '2') {
-			$query = $this->db->query("SELECT NAMA_PEGAWAI AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI
+			$query = $this->db->query("SELECT NAMA_PEGAWAI AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI, (SELECT COUNT(NILAI_REALISASI) FROM ALKET WHERE NILAI_REALISASI IS NULL) AS JUMLAH_BELUM_REALISASI
 				FROM DIVISI D JOIN JABATAN J ON J.KODE_DIVISI = D.KODE_DIVISI
 				JOIN PEGAWAI P ON P.KODE_JABATAN = J.KODE_JABATAN
 				JOIN UNIT_KERJA U ON U.KODE_UNIT_KERJA = P.KODE_UNIT_KERJA
@@ -50,7 +50,7 @@ class m_dashboard extends CI_Model {
                 WHERE NAMA_UNIT_KERJA LIKE '%$uk%' and NAMA_DIVISI LIKE '%$dv%' and P.NIP != '$nip'
                 GROUP BY NAMA_PEGAWAI");
 		} else if($lv == '3'){
-			$query = $this->db->query("SELECT NAMA_PEGAWAI AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI
+			$query = $this->db->query("SELECT NAMA_PEGAWAI AS NAMA_UNIT, COUNT(NILAI_ALKET) AS JUMLAH_DATA_ALKET, IFNULL(SUM(NILAI_ALKET),0) AS JUMLAH_NILAI_ALKET, COUNT(NILAI_REALISASI) AS JUMLAH_DATA_REALISASI, IFNULL(SUM(NILAI_REALISASI),0) AS JUMLAH_NILAI_REALISASI, (SELECT COUNT(NILAI_REALISASI) FROM ALKET WHERE NILAI_REALISASI IS NULL) AS JUMLAH_BELUM_REALISASI
 				FROM DIVISI D JOIN JABATAN J ON J.KODE_DIVISI = D.KODE_DIVISI
 				JOIN PEGAWAI P ON P.KODE_JABATAN = J.KODE_JABATAN
 				JOIN UNIT_KERJA U ON U.KODE_UNIT_KERJA = P.KODE_UNIT_KERJA
@@ -61,6 +61,10 @@ class m_dashboard extends CI_Model {
 		}
 
 	return $query;
+	}
+
+	function get_detil_rekap($uk){
+		return $this->db->query("select nama_unit_kerja as asal, alamat_unit_kerja as alamat_asal from unit_kerja where nama_unit_kerja = '$uk'")->result();
 	}
 }
 

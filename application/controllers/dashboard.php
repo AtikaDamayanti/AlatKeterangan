@@ -18,8 +18,9 @@ class dashboard extends CI_Controller {
 		$result = $this->dashboard->getNotif($nip);
 		$data = array();
 		foreach ($result as $value) {
+			if($value->status_pemberitahuan == 'belum') {}
 			echo "<a href='$value->link_mp'><i class='fa fa-tasks fa-fw'></i> 
-            <span class='pull-right text-muted small' onclick='updateNotif(".$value->kode_pemberitahuan.")'>".$value->dari."</span></a>";
+            <span class='pull-right text-muted small' onclick='updateNotif(".$value->kode_pemberitahuan.")'>".$value->dari."</span></a><br>";
 		}
 	}
 
@@ -44,14 +45,18 @@ class dashboard extends CI_Controller {
 		
 		$result = $this->dashboard->getRekap($lv,$uk,$dv,$nip)->result();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->NAMA_UNIT;
 	    	$row[] = $value->JUMLAH_DATA_ALKET;
 	    	$row[] = rp($value->JUMLAH_NILAI_ALKET);
 	    	$row[] = $value->JUMLAH_DATA_REALISASI;
 	    	$row[] = rp($value->JUMLAH_NILAI_REALISASI);
+	    	$row[] = $value->JUMLAH_BELUM_REALISASI;
 	    	$data[] = $row;
+	    	$no++;
 	    }
 	    echo json_encode(['data' => $data]);
 	}
@@ -67,11 +72,22 @@ class dashboard extends CI_Controller {
 			$data[] = array(
 				'NAMA_UNIT' => $value->NAMA_UNIT,
 				'JUMLAH_DATA_ALKET' => $value->JUMLAH_DATA_ALKET,
-				'JUMLAH_DATA_REALISASI' => $value->JUMLAH_DATA_REALISASI
+				'JUMLAH_DATA_REALISASI' => $value->JUMLAH_DATA_REALISASI,
+				'JUMLAH_BELUM_REALISASI' => $value->JUMLAH_BELUM_REALISASI
 				);
 		}
 		echo json_encode($data);
+	}
 
+	public function cetak(){
+		$lv = $this->session->userdata('level');
+		$uk = $this->session->userdata('unit_kerja');
+		$dv = $this->session->userdata('divisi');
+		$nip = $this->session->userdata('nip');
+
+		$data['a'] = $this->dashboard->get_detil_rekap($uk);
+		$data['b'] = $this->dashboard->getRekap($lv,$uk,$dv,$nip)->result();
+		$this->load->view('v_laporan_rekap_besar',$data);
 	}
 
 }

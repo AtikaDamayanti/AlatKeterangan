@@ -39,14 +39,17 @@ class master extends CI_Controller {
 	public function dataUk(){
 	    $result = $this->master->getUk();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->KODE_UNIT_KERJA;
 	    	$row[] = $value->NAMA_UNIT_KERJA;
 	    	$row[] = $value->ALAMAT_UNIT_KERJA;
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" 		title="Ubah" onclick="edit_uk('."'".$value->KODE_UNIT_KERJA."'".')"><i 		class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_uk('."'".$value->KODE_UNIT_KERJA."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 			$data[] = $row;
+			$no++;
 	    }
 	    echo json_encode(['data' => $data]);
 	}
@@ -54,13 +57,16 @@ class master extends CI_Controller {
 	public function dataDv(){
 	    $result = $this->master->getDv();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->KODE_DIVISI;
 	    	$row[] = $value->NAMA_DIVISI;
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" 		title="Ubah" onclick="edit_dv('."'".$value->KODE_DIVISI."'".	')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_dv('."'".$value->KODE_DIVISI."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 			$data[] = $row;
+			$no++;
 	    }
 	    echo json_encode(['data' => $data]);
 	}
@@ -68,8 +74,10 @@ class master extends CI_Controller {
 	public function dataJb(){
 	    $result = $this->master->getJb();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->KODE_J;
 	    	$row[] = $value->NAMA_J;
 	    	$row[] = $value->J_INDUK;
@@ -78,6 +86,7 @@ class master extends CI_Controller {
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" 		title="Ubah" onclick="edit_jb('."'".$value->KODE_J."'".	')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_jb('."'".$value->KODE_J."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 			$data[] = $row;
+		    $no++;
 	    }
 	    echo json_encode(['data' => $data]);
 	}
@@ -85,8 +94,10 @@ class master extends CI_Controller {
 	public function dataPg(){
 	    $result = $this->master->getPg();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->NIP;
 	    	$row[] = $value->NAMA_J;
 	    	$row[] = $value->NAMA_PEGAWAI;
@@ -96,6 +107,7 @@ class master extends CI_Controller {
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" 		title="Ubah" onclick="edit_pg('."'".$value->NIP."'".	')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_pg('."'".$value->NIP."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 			$data[] = $row;
+	 	   	$no++;
 	    }
 	    echo json_encode(['data' => $data]);
 	}
@@ -103,8 +115,10 @@ class master extends CI_Controller {
 	public function dataJd(){
 	    $result = $this->master->getJd();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->KODE_JENIS_DOKUMEN;
 	    	$row[] = $value->NAMA_JENIS_DOKUMEN;
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" 		title="Ubah" onclick="edit_jd('."'".$value->KODE_JENIS_DOKUMEN."'".	')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
@@ -117,13 +131,16 @@ class master extends CI_Controller {
 	public function dataSd(){
 	    $result = $this->master->getSd();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->KODE_STATUS_DOKUMEN;
 	    	$row[] = $value->NAMA_STATUS_DOKUMEN;
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" 		title="Ubah" onclick="edit_sd('."'".$value->KODE_STATUS_DOKUMEN."'".	')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_sd('."'".$value->KODE_STATUS_DOKUMEN."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 			$data[] = $row;
+	    	$no++;
 	    }
 	    echo json_encode(['data' => $data]);
 	}
@@ -131,8 +148,10 @@ class master extends CI_Controller {
 	public function dataWp(){
 	    $result = $this->master->getWp();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->KODE_WP;
 	    	$row[] = $value->NPWP;
 	    	$row[] = $value->NAMA_WP;
@@ -142,6 +161,7 @@ class master extends CI_Controller {
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Ubah" onclick="edit_wp('."'".$value->KODE_WP."'".	')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_wp('."'".$value->KODE_WP."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 	    	$data[] = $row;
+	    	$no++;
 	    }
 	    echo json_encode(['data' => $data]);
 	}
@@ -149,8 +169,10 @@ class master extends CI_Controller {
 	public function dataNwp(){
 	    $result = $this->master->getNwp();
 	    $data = array();
+	    $no = 1;
 	    foreach ($result as $value) {
 	    	$row = array();
+	    	$row[] = $no;
 	    	$row[] = $value->KODE_NON_WP;
 	    	$row[] = $value->NAMA_NON_WP;
 	    	$row[] = $value->ALAMAT_NON_WP;
@@ -159,6 +181,7 @@ class master extends CI_Controller {
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" 		title="Ubah" onclick="edit_nwp('."'".$value->KODE_NON_WP."'".	')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_nwp('."'".$value->KODE_NON_WP."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 	    	$data[] = $row;
+	    	$no++;
 	    }
 	    echo json_encode(['data' => $data]);
 	}

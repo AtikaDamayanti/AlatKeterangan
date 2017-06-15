@@ -5,7 +5,7 @@ class M_penerimaan extends CI_Model {
 
 	//ambil data
 	public function getDetilAk($id){
-		$query = $this->db->query("select NO_ALKET, IF(KODE_WP IS NULL, KODE_NON_WP, KODE_WP) AS KODE from alket where NO_ALKET = '$id' ");
+		$query = $this->db->query("select NO_ALKET, DATE_FORMAT(LEFT(TGL_TERIMA,10), '%d %m %Y') AS TGL_TERIMA, IF(KODE_WP IS NULL, KODE_NON_WP, KODE_WP) AS KODE from alket where NO_ALKET = '$id' ");
 		return $query->result();
 	}
 
@@ -105,7 +105,7 @@ class M_penerimaan extends CI_Model {
 	}
 
 	public function get_detil_ak($id){
-		$query = $this->db->query("SELECT NO_ALKET, ua.nama_unit_kerja as asal, ut.nama_unit_kerja as tujuan, if(a.kode_wp is null, a.kode_non_wp, a.kode_wp) as kode_p, if(a.kode_wp is null, nama_non_wp, nama_wp) as nama_p, nama_jenis_dokumen, lembar, nilai_alket, tgl_kirim, tgl_terima, tgl_realisasi, tgl_laporan, nilai_realisasi, keterangan, nama_status_dokumen, nama_pegawai, if(nilai_realisasi > nilai_alket, concat('+ ',nilai_realisasi-nilai_alket), concat('- ',nilai_realisasi-nilai_alket)) as selisih
+		$query = $this->db->query("SELECT NO_ALKET, ua.nama_unit_kerja as asal, ua.alamat_unit_kerja as alamat_asal, ut.nama_unit_kerja as tujuan, ut.alamat_unit_kerja as alamat_tujuan, if(a.kode_wp is null, a.kode_non_wp, a.kode_wp) as kode_p, if(a.kode_wp is null, nama_non_wp, nama_wp) as nama_p, nama_jenis_dokumen, lembar, nilai_alket, tgl_kirim, tgl_terima, tgl_realisasi, tgl_laporan, nilai_realisasi, keterangan, nama_status_dokumen, nama_pegawai, if(nilai_realisasi > nilai_alket, concat('+ ',nilai_realisasi-nilai_alket), concat(nilai_realisasi-nilai_alket)) as selisih
 			FROM ALKET a
 			join unit_kerja ua on ua.KODE_UNIT_KERJA = a.unit_kerja_asal
 			join unit_kerja ut on ut.KODE_UNIT_KERJA = a.unit_kerja_tujuan
