@@ -59,14 +59,19 @@
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <div id="jumlah" onclick="isi()">
-                        
+                        <div id="jumlah" onclick="isi()">                  
                         </div>
                     </a>    
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
                             <a href="#">
-                                <div id="isi"></div>
+                                <div id="isi">
+                                    <!-- <a id="linkp">
+                                    <i class='fa fa-tasks fa-fw'></i> 
+                                    <span id="isip" class='text-muted small'></span>
+                                    </a>
+                                    <br> -->
+                                </div>
                             </a>
                         </li>
                     </ul>
@@ -89,10 +94,14 @@
 
              <script type="text/javascript">  
                     function isi(){
+                        
                         $.ajax({
                             url : "<?php echo site_url('dashboard/getNotif/');?>",
                             type: "GET",
-                            success: function(data) {
+                            success: function(data) { 
+                                // $("#linkp").href = data[0].link_mp;   
+                                // $("#isip").text(data.dari);
+                                // $("#isip").onclick = updateNotif(data.kode_pemberitahuan);
                                 $("#isi").html(data);
                             },
                             error: function (jqXHR, textStatus, errorThrown)

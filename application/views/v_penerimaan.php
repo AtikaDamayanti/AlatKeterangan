@@ -208,7 +208,7 @@
                                         
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default glyphicon-print" data-toogle="modal">Tutup</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                                     </div>
                                 </div>
                             </div>

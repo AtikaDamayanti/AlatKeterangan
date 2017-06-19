@@ -22,6 +22,7 @@ class dashboard extends CI_Controller {
 			echo "<a href='$value->link_mp'><i class='fa fa-tasks fa-fw'></i> 
             <span class='pull-right text-muted small' onclick='updateNotif(".$value->kode_pemberitahuan.")'>".$value->dari."</span></a><br>";
 		}
+		//echo json_encode($data);
 	}
 
 	public function getJumlahNotif(){
