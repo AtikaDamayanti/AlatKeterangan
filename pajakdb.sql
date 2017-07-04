@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2017 at 01:31 PM
+-- Generation Time: Jul 04, 2017 at 06:42 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -53,7 +53,7 @@ CREATE TABLE `alket` (
 INSERT INTO `alket` (`NO_ALKET`, `UNIT_KERJA_ASAL`, `UNIT_KERJA_TUJUAN`, `KODE_WP`, `KODE_NON_WP`, `KODE_JENIS_DOKUMEN`, `LEMBAR`, `KODE_STATUS_DOKUMEN`, `NILAI_ALKET`, `TGL_KIRIM`, `TGL_TERIMA`, `TGL_REALISASI`, `KETERANGAN`, `TGL_LAPORAN`, `NILAI_REALISASI`, `DOKUMEN`, `NIP`) VALUES
 ('AK001', '200', '611', 'WP001', NULL, 'JD001', 1, 'SD003', 1, '2017-06-01 00:00:00', '2017-06-05 11:00:29', '2017-06-06', '', '2017-06-05 12:27:41', 1000, 'Lighthouse.jpg', '61104'),
 ('AK002', '200', '611', NULL, 'NW001', 'JD002', 1, 'SD004', 123, '2017-06-12 05:26:34', '2017-06-12 03:39:49', '2017-06-14', '', '2017-06-13 04:41:16', 22, 'kirim kanwil.PNG', '61105'),
-('AK003', '200', '611', NULL, 'NW001', 'JD002', 2, 'SD003', 10000, '2017-06-13 05:49:00', '2017-06-14 09:55:36', '0000-00-00', '', '2017-06-14 11:53:08', 444, 'tabel realisasi kpp.png', '61105');
+('AK003', '200', '611', NULL, 'NW001', 'JD002', 2, 'SD001', 10000, '2017-06-13 05:49:00', '2017-06-14 09:55:36', NULL, '', NULL, NULL, 'tabel realisasi kpp.png', NULL);
 
 -- --------------------------------------------------------
 
@@ -100,7 +100,14 @@ CREATE TABLE `divisi` (
 INSERT INTO `divisi` (`KODE_DIVISI`, `NAMA_DIVISI`) VALUES
 ('DV001', 'Pelaksana Data dan Potensi'),
 ('DV002', 'Pengawasan dan Konsultasi'),
-('DV003', 'Ekstentifikasi');
+('DV003', 'Ekstentifikasi'),
+('DV004', 'Dukungan Teknis Komputer'),
+('DV005', 'Bimbingan Konsultasi'),
+('DV006', 'Administrasi Penyidikan'),
+('DV007', 'Bimbingan Penagihan'),
+('DV008', ' Bimbingan Pemeriksaan Dan Kepatuhan Internal'),
+('DV009', 'Hubungan Masyarakat'),
+('DV010', 'Bimbingan Pelayanan');
 
 -- --------------------------------------------------------
 
@@ -146,7 +153,10 @@ CREATE TABLE `jenis_dokumen` (
 INSERT INTO `jenis_dokumen` (`KODE_JENIS_DOKUMEN`, `NAMA_JENIS_DOKUMEN`) VALUES
 ('JD001', 'PPAT'),
 ('JD002', 'KP.PDIP.3.1'),
-('JD003', 'Jual Beli');
+('JD003', 'Jual Beli'),
+('JD004', 'A'),
+('JD005', 'B'),
+('JD006', 'C');
 
 -- --------------------------------------------------------
 
@@ -165,9 +175,9 @@ CREATE TABLE `m_pemberitahuan` (
 --
 
 INSERT INTO `m_pemberitahuan` (`kode_mp`, `keterangan_mp`, `link_mp`) VALUES
-('MP02', 'Data Alat Keterangan Pajak Baru', 'penerimaan'),
-('MP03', 'Data Alat Keterangan Pajak Telah Direalisasi', 'pengiriman'),
-('MP04', 'Data Alat Keterangan Pajak Telah Direalisasi', 'penerimaan');
+('MP02', 'Alat Keterangan Pajak Baru', 'penerimaan'),
+('MP03', 'Alat Keterangan Pajak Direalisasi', 'pengiriman'),
+('MP04', 'Alat Keterangan Pajak Direalisasi', 'penerimaan');
 
 -- --------------------------------------------------------
 
@@ -188,7 +198,15 @@ CREATE TABLE `non_wajib_pajak` (
 --
 
 INSERT INTO `non_wajib_pajak` (`KODE_NON_WP`, `NAMA_NON_WP`, `TELP_NON_WP`, `KPP_NON_WP`, `ALAMAT_NON_WP`) VALUES
-('NW001', 'Kevin Julio', '081277884456', '618', 'Jl Pahlawan 102');
+('NW001', 'Kevin Julio', '081277884456', '618', 'Jl Pahlawan 102'),
+('NW002', 'Fanywati Dasalim', '02158355020', '615', 'Jl. Surya Mandala I Jakarta Barat'),
+('NW003', 'Devina Alfina', '02158355021', '615', 'Jl. Pulo Lentut Kav. II-E/4 Pulogadung Jakarta Timur'),
+('NW004', 'Desi Rismaya', '0214608820', '615', 'Jl. S. Wiryopranoto No. 37 Sawah Besar Jakarta Barat'),
+('NW005', 'Imam Safarudin', '0214608829', '618', 'Jl. Jend. Sudirman Kav. 60 Jakarta Selatan '),
+('NW006', 'Tina Karlina', '0216591166', '618', 'Jl. Pemuda No. 296 Jakarta Timur '),
+('NW007', 'Dian Romansyah', '0215220111', '611', 'Jl. Hayam Wuruk No 100 Jakarta Barat'),
+('NW008', 'Arif Fiansyah', '0217891224', '611', 'Jl. HR. Rasuna Said Kav. B-1 Kuningan Jakarta Selatan'),
+('NW009', 'Maman Sulaeman', '0216498755', '611', 'Jl. Casablanca Kav. 18 Jakarta Selatan');
 
 -- --------------------------------------------------------
 
@@ -218,7 +236,11 @@ INSERT INTO `pegawai` (`NIP`, `KODE_JABATAN`, `KODE_UNIT_KERJA`, `PASSWORD`, `NA
 ('61102', 'JB003', '611', '30654', 'Cindy Amalia', 'Perum Pluit Indah', '087965438897', '', 'min.png'),
 ('61103', 'JB004', '611', '56743', 'Ciko Saputra', 'Jl Juanda X/45', '08765439907', NULL, 'pap.png'),
 ('61104', 'JB005', '611', '64538', 'Dinda Amelia', 'Jl Arjuna Gg V/12', '081264739578', NULL, 'pep.png'),
-('61105', 'JB006', '611', '45676', 'Deni Darko', 'Komp Al Azhar Bintaro', '086473467992', NULL, 'pip.png');
+('61105', 'JB006', '611', '45676', 'Deni Darko', 'Komp Al Azhar Bintaro', '086473467992', NULL, 'pip.png'),
+('61501', 'JB002', '615', '12859', 'Abdul Aziz', 'Dusun Bambu No 12 Bandung', '087851423695', 'Abdulaziz@gmail.com', 'boss.png'),
+('61502', 'JB003', '615', '19774', 'Henry Bima', 'Jl. Daan Mogot No.34 Grogol', '082330602071', 'bimahenry@gmail.com', 'young.png'),
+('61503', 'JB004', '615', '7985', 'Iriawan Tanti', 'Jl. K. S. Tubun No. 92 - 94', '083871576645', 'irtanti@gmail.com', 'indian.png'),
+('61504', 'JB005', '615', '26134', 'Shelly Agnessia', 'Jl. Daan Mogot Km. 17 Cengkareng', '081286616893', 'agnes@gmail.com', 'kid.png');
 
 -- --------------------------------------------------------
 
@@ -239,14 +261,13 @@ CREATE TABLE `pemberitahuan` (
 --
 
 INSERT INTO `pemberitahuan` (`kode_pemberitahuan`, `status_pemberitahuan`, `asal_pemberitahuan`, `tujuan_pemberitahuan`, `keterangan_pemberitahuan`) VALUES
-('', 'belum', '61105', '61103', 'MP04'),
 ('170612001', 'sudah', '20001', '61101', 'MP02'),
 ('170612002', 'sudah', '61101', '61103', 'MP02'),
 ('170612003', 'sudah', '61103', '61105', 'MP02'),
-('170613004', 'belum', '20001', '61101', 'MP02'),
-('170614005', 'belum', '61101', '61103', 'MP02'),
-('170614006', 'belum', '61103', '61105', 'MP02'),
-('170614007', 'belum', '61105', '61103', 'MP04'),
+('170613004', 'sudah', '20001', '61101', 'MP02'),
+('170614005', 'sudah', '61101', '61103', 'MP02'),
+('170614006', 'sudah', '61103', '61105', 'MP02'),
+('170614007', 'sudah', '61105', '61103', 'MP04'),
 ('170614008', 'belum', '61105', '61101', 'MP04'),
 ('170614009', 'sudah', '61105', '20001', 'MP03');
 
@@ -280,17 +301,27 @@ INSERT INTO `status_dokumen` (`KODE_STATUS_DOKUMEN`, `NAMA_STATUS_DOKUMEN`) VALU
 CREATE TABLE `unit_kerja` (
   `KODE_UNIT_KERJA` varchar(10) NOT NULL,
   `NAMA_UNIT_KERJA` varchar(70) DEFAULT NULL,
-  `ALAMAT_UNIT_KERJA` varchar(70) DEFAULT NULL
+  `ALAMAT_UNIT_KERJA` varchar(70) DEFAULT NULL,
+  `TELP_UNIT_KERJA` varchar(15) NOT NULL,
+  `FAX_UNIT_KERJA` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `unit_kerja`
 --
 
-INSERT INTO `unit_kerja` (`KODE_UNIT_KERJA`, `NAMA_UNIT_KERJA`, `ALAMAT_UNIT_KERJA`) VALUES
-('200', 'Kantor Wilayah Direktorat Jendral Pajak Jawa Timur I', 'Jl Jagir Wonokromo 104 (Lt 6)'),
-('611', 'Kantor Pelayanan Pajak Pratama Gubeng', 'Jl Gubeng Airlangga 28 A Surabaya'),
-('618', 'Kantor Pelayanan Pajak Pratama Karangpilang', 'Jl Jagir Wonokromo 104 (Lt 3)');
+INSERT INTO `unit_kerja` (`KODE_UNIT_KERJA`, `NAMA_UNIT_KERJA`, `ALAMAT_UNIT_KERJA`, `TELP_UNIT_KERJA`, `FAX_UNIT_KERJA`) VALUES
+('200', 'Kantor Wilayah Direktorat Jendral Pajak Jawa Timur I', 'Jl Jagir Wonokromo 104 (Lt 6)', '031 8482480', '8481127'),
+('605', 'Kantor Pelayanan Pajak Pratama Surabaya Krembangan', 'Gedung GKN I, Jl. Indrapura No.5 Surabaya', '031 3556879', '3556880'),
+('607', 'Kantor Pelayanan Pajak Pratama Surabaya Tegalsari', 'Gedung GKN II, Jl. Dinoyo No.111 Surabaya', '031 5615369', '5615367'),
+('609', 'Kantor Pelayanan Pajak Pratama Surabaya Wonocolo', 'Jl. Jagir Wonokromo No.104 Surabaya', '031 8417629', '8411692'),
+('611', 'Kantor Pelayanan Pajak Pratama Surabaya Gubeng', 'Jl Gubeng Airlangga 28 A Surabaya', '031 5031905', '5031566'),
+('613', 'Kantor Pelayanan Pajak Pratama Surabaya Pabean Cantikan', 'Gedung GKN I, Jl. Indrapura No.5 Surabaya', '031 35230937', '3571156'),
+('614', 'Kantor Pelayanan Pajak Pratama Surabaya Sawahan', 'Gedung GKN II, Jl. Dinoyo No.111 Surabaya', '031 566523133', '5665230'),
+('615', 'Kantor Pelayanan Pajak Pratama Surabaya Rungkut', 'Jl. Jagir Wonokromo No.104 Surabaya', '031 8483196', '8483197'),
+('618', 'Kantor Pelayanan Pajak Pratama Surabaya Karangpilang', 'Jl Jagir Wonokromo 104 (Lt 3)', '031 848391116', '8483914'),
+('619', 'Kantor Pelayanan Pajak Pratama Surabaya Mulyorejo', 'Jl. Jagir Wonokromo No.100 Surabaya', '031 848390609', '8483905'),
+('631', 'KPP Madya Surabaya', 'Jl. Jagir Wonokromo No.104 Surabaya', '031 8497200', '8482557');
 
 -- --------------------------------------------------------
 
@@ -312,9 +343,7 @@ CREATE TABLE `wajib_pajak` (
 --
 
 INSERT INTO `wajib_pajak` (`KODE_WP`, `AR`, `NPWP`, `NAMA_WP`, `ALAMAT_WP`, `TELP_WP`) VALUES
-('WP001', '61104', '123.456.789-0.111', 'Livana', 'Jl Margonda Raya Depok', '08765485968'),
-('WP2', '61105', '12.456.890.0-770.073', 'Kevin Julio', 'Jl Pahlawan 102', '081277884456'),
-('WP3', '61105', '56.525.525.5-525.222', 'Kevin Julio', 'Jl Pahlawan 102', '081277884456');
+('WP001', '61104', '123.456.789-0.111', 'Livana', 'Jl Margonda Raya Depok', '08765485968');
 
 --
 -- Indexes for dumped tables

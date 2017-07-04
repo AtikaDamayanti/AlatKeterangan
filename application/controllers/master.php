@@ -14,12 +14,12 @@ class master extends CI_Controller {
 		$id = $this->session->userdata('unit_kerja');
 
 		//ambil kode
-		$data['kode_dv'] = gen_id('DV', 'divisi', 'KODE_DIVISI', 3, 3);
-		$data['kode_jb'] = gen_id('JB', 'jabatan', 'KODE_JABATAN', 3, 3);
-		$data['kode_jd'] = gen_id('JD', 'jenis_dokumen', 'KODE_JENIS_DOKUMEN', 3, 3);
-		$data['kode_sd'] = gen_id('SD', 'status_dokumen', 'KODE_STATUS_DOKUMEN', 3, 3);
-		$data['kode_wp'] = gen_id('WP', 'wajib_pajak', 'KODE_WP', 3, 3);
-		$data['kode_nwp'] = gen_id('NW', 'non_wajib_pajak', 'KODE_NON_WP', 3, 3);
+		// $data['kode_dv'] = gen_id('DV', 'divisi', 'KODE_DIVISI', 3, 3);
+		// $data['kode_jb'] = gen_id('JB', 'jabatan', 'KODE_JABATAN', 3, 3);
+		// $data['kode_jd'] = gen_id('JD', 'jenis_dokumen', 'KODE_JENIS_DOKUMEN', 3, 3);
+		// $data['kode_sd'] = gen_id('SD', 'status_dokumen', 'KODE_STATUS_DOKUMEN', 3, 3);
+		// $data['kode_wp'] = gen_id('WP', 'wajib_pajak', 'KODE_WP', 3, 3);
+		// $data['kode_nwp'] = gen_id('NW', 'non_wajib_pajak', 'KODE_NON_WP', 3, 3);
 		
 		//ambil combobox
 		$data['cb_dv'] = $this->master->cb_dv();
@@ -33,9 +33,46 @@ class master extends CI_Controller {
 
 	public function getKodePegawai($id){
 		$result = $this->master->kode_pg($id);
-		echo $result;
+		echo strtoupper($id).str_pad($result,2,"0",STR_PAD_LEFT);
 	}
 
+	public function getKodeJd()
+	{
+		$data = gen_id('JD', 'jenis_dokumen', 'KODE_JENIS_DOKUMEN', 3, 3);
+		echo json_encode($data);
+	}
+
+	public function getKodeJb()
+	{
+		$data = gen_id('JB', 'jabatan', 'KODE_JABATAN', 3, 3);
+		echo json_encode($data);
+	}
+
+	public function getKodeDv()
+	{
+		$data = gen_id('DV', 'divisi', 'KODE_DIVISI', 3, 3);
+		echo json_encode($data);
+	}	
+
+	public function getKodeSd()
+	{
+		$data = gen_id('SD', 'status_dokumen', 'KODE_STATUS_DOKUMEN', 3, 3);
+		echo json_encode($data);
+	}
+
+	public function getKodeWp()
+	{
+		$data = gen_id('WP', 'wajib_pajak', 'KODE_WP', 3, 3);
+		echo json_encode($data);
+	}
+
+	public function getKodeNwp()
+	{
+		$data = gen_id('NW', 'non_wajib_pajak', 'KODE_NON_WP', 3, 3);
+		echo json_encode($data);
+	}
+
+	//ambil data tabel
 	public function dataUk(){
 	    $result = $this->master->getUk();
 	    $data = array();
@@ -46,6 +83,8 @@ class master extends CI_Controller {
 	    	$row[] = $value->KODE_UNIT_KERJA;
 	    	$row[] = $value->NAMA_UNIT_KERJA;
 	    	$row[] = $value->ALAMAT_UNIT_KERJA;
+	    	$row[] = $value->TELP_UNIT_KERJA;
+	    	$row[] = $value->FAX_UNIT_KERJA;
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" 		title="Ubah" onclick="edit_uk('."'".$value->KODE_UNIT_KERJA."'".')"><i 		class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_uk('."'".$value->KODE_UNIT_KERJA."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 			$data[] = $row;
@@ -100,10 +139,10 @@ class master extends CI_Controller {
 	    	$row[] = $no;
 	    	$row[] = $value->NIP;
 	    	$row[] = $value->NAMA_J;
+	    	$row[] = $value->NAMA_UK;
 	    	$row[] = $value->NAMA_PEGAWAI;
 	    	$row[] = $value->ALAMAT_PEGAWAI;
 	    	$row[] = $value->TELP_PEGAWAI;
-	    	$row[] = $value->NAMA_UK;
 	    	$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" 		title="Ubah" onclick="edit_pg('."'".$value->NIP."'".	')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  	<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_pg('."'".$value->NIP."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 			$data[] = $row;

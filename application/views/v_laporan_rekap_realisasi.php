@@ -8,16 +8,16 @@
     <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
 	<style type="text/css" media="screen">
 
+		.td-header{
+			padding: 5px 5px 5px 5px;
+		}
+
 		img {
 			margin-right: 20px;
 		}
 
-		.atas{
-			padding-top : 30px;
-		}
-
 		.kepada{
-			margin: 20px 20px 10px 50px;
+			margin: 20px 20px 10px 100px;
 		}
 
 		.td-header {
@@ -34,10 +34,11 @@
 		.isi tr{
 			margin:0px 30px 30px 30px;
 			border-bottom: 2px solid #ddd;
-			border-top: 2px solid #ddd; 
+			border-top: 2px solid #ddd;
 		}
 		
 		.isi td{
+			border: 2px solid #ddd;
 			width: 350px;
 			padding: 5px;
 		}
@@ -85,9 +86,9 @@
 <body>
 <page size="A4">
 <?php foreach ($detil as $value) { ?>
-	<table border="0" align="center" class="atas">
+	<table align="center" class="atas">
 		<tr>
-			<td rowspan="9" width="120" class="td-header">
+			<td rowspan="9" width="200" class="td-header">
 				<img src="<?php echo base_url('assets/gambar/logo_pajak.png') ?>" width="150px" height="150px">
 			</td>
 		</tr>
@@ -116,7 +117,7 @@
 	</table>
 	<hr>
 	
-	<table border="0" class="kepada">
+	<table class="kepada">
 		<tr>
 			<td width="100px">Nomor</td>
 			<td width="10px"> : </td>
@@ -153,7 +154,7 @@
 		</tr>
 	</table>
 
-	<table width="650px" class="table-hovered table-bordered isi">
+	<table width="700px" class="isi">
 		<tr>
 			<td>No Alket</td>
 			<td><?php echo $value->NO_ALKET; ?></td>

@@ -45,6 +45,8 @@
                                         <th>Kode</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
+                                        <th>Telp</th>
+                                        <th>Fax</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -54,6 +56,8 @@
                                         <th>Kode</th>
                                         <th>Nama</th>
                                         <th>Alamat</th>
+                                        <th>Telp</th>
+                                        <th>Fax</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>
@@ -83,6 +87,14 @@
                                                 <div class="form-group">
                                                     <label>Alamat Unit Kerja</label>
                                                     <input type="text" size="20" class="form-control" id="alamat_uk" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Telepon Unit Kerja</label>
+                                                    <input type="text" size="20" class="form-control" id="telp_uk" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Faximile Unit Kerja</label>
+                                                    <input type="text" size="20" class="form-control" id="fax_uk" required>
                                                 </div>
                                             </form>
                                         </div>
@@ -147,6 +159,8 @@
                                         $('#kode_uk').val(data.KODE_UNIT_KERJA);
                                         $('#nama_uk').val(data.NAMA_UNIT_KERJA);
                                         $('#alamat_uk').val(data.ALAMAT_UNIT_KERJA);
+                                        $('#telp_uk').val(data.TELP_UNIT_KERJA);
+                                        $('#fax_uk').val(data.FAX_UNIT_KERJA);
                                         $('#modal_uk').modal('show');
                                         $('.modal-title').text('Ubah Data Unit Kerja');
                                     },
@@ -169,11 +183,13 @@ function submit_uk(){
     var kode_uk = $("#kode_uk").val();
     var nama_uk = $("#nama_uk").val();
     var alamat_uk = $("#alamat_uk").val();
+    var telp_uk = $("#telp_uk").val();
+    var fax_uk = $("#fax_uk").val();
 
     $.ajax({
         type: "POST",
         url : url,
-        data: { kode_uk:kode_uk,nama_uk:nama_uk,alamat_uk:alamat_uk},
+        data: { kode_uk:kode_uk,nama_uk:nama_uk,alamat_uk:alamat_uk,telp_uk:telp_uk,fax_uk:fax_uk},
         success: function(data)
         {
             reload();
@@ -224,7 +240,7 @@ function submit_uk(){
 
                         <div class="form-group">
                             <label>Kode divisi</label>
-                            <input type="text" class="form-control" id="kode_dv" value=<?=$kode_dv?> readonly>
+                            <input type="text" class="form-control" id="kode_dv" readonly>
                         </div>
 
                         <div class="form-group">
@@ -279,6 +295,19 @@ function submit_uk(){
         $('#divisi_form')[0].reset();
         $('#modal_dv').modal('show');
         $('.modal-title').text('Tambah Data Divisi');
+        $.ajax({
+            url : "<?php echo site_url('master/getKodeDv')?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data)
+            {
+                $("#kode_dv").val(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Masalah saat mengambil data');
+            }
+        });
     }
 
     function edit_dv(id){
@@ -373,7 +402,7 @@ function submit_uk(){
 
                         <div class="form-group">
                             <label>Kode Jabatan</label>
-                            <input type="text" class="form-control" id="kode_jb" value=<?=$kode_jb?> readonly>
+                            <input type="text" class="form-control" id="kode_jb" readonly>
                         </div>
 
                         <div class="form-group">
@@ -463,6 +492,19 @@ function submit_uk(){
         $('#jabatan_form')[0].reset();
         $('#modal_jb').modal('show');
         $('.modal-title').text('Tambah Data Jabatan');
+        $.ajax({
+            url : "<?php echo site_url('master/getKodeJb')?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data)
+            {
+                $("#kode_jb").val(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Masalah saat mengambil data');
+            }
+        });
     }
 
     function edit_jb(id){
@@ -527,16 +569,16 @@ function submit_uk(){
     <!-- Button -->
     <p><a class="btn btn-primary glyphicon-plus" data-toggle="modal" onclick="add_pg()">Tambah</a><a class="btn btn-primary glyphicon-asterisk" data-  toggle="modal" onclick="reload_pg()"> Perbarui</a></p>
    <div class="table-responsive">
-   <table class="display nowrap" id="tgl_pg" cellspacing="0" width="100%">
+   <table class="display nowrap" id="tbl_pg" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>No</th>
                 <th>NIP</th>
                 <th>Jabatan</th>
+                <th>Unit Kerja</th>
                 <th>Nama</th>
                 <th>Alamat</th>
                 <th>Telepon</th>
-                <th>Unit Kerja</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -545,10 +587,10 @@ function submit_uk(){
                 <th>No</th>
                 <th>NIP</th>
                 <th>Jabatan</th>
+                <th>Unit Kerja</th>
                 <th>Nama</th>
                 <th>Alamat</th>
                 <th>Telepon</th>
-                <th>Unit Kerja</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>
@@ -614,7 +656,7 @@ function submit_uk(){
                         </div>
 
                         <div class="form-group">
-                            <label>Foto Pegawai</label>
+                            <label>Foto Pegawai (Wajib di Unggah)</label>
                             <input type="file" id="fotop" name="fotop" class="form-control" required>
                         </div>
                     </form>
@@ -630,7 +672,8 @@ function submit_uk(){
     <script type="text/javascript">
 
     $(document).ready(function() {
-        $('#tgl_pg').DataTable({
+
+        $('#tbl_pg').DataTable({
             "dom" : 'Bfrtip',
             "buttons" : [
             'copy', 'excel'
@@ -638,39 +681,31 @@ function submit_uk(){
             "ajax": "<?php echo base_url('index.php/master/dataPg'); ?>"
         });
 
-    $("#btn_simpan_pg").click(function(){
-        var url;
-        if(save_method == 'add') {
-            url = "<?php echo base_url('index.php/master/addPg')?>";
-        } else {
-            url = "<?php echo base_url('index.php/master/updatePg')?>";
-        }
+        $("#btn_simpan_pg").click(function(){
+            var url;
+            if(save_method == 'add') {
+                url = "<?php echo base_url('index.php/master/addPg')?>";
+            } else {
+                url = "<?php echo base_url('index.php/master/updatePg')?>";
+            }
+            var form_data = new FormData(document.getElementById('pegawai_form'));
 
-        // event.preventDefault();
-        // var nip = $("#nip").val();
-        // var namap = $("#namap").val();
-        // var alamatp = $("#alamatp").val();
-        // var teleponp = $("#teleponp").val();
-        // var jabatanp = $("#jabatanp").val();   
-        // var unit_kerjap = $("#unit_kerjap").val();
-        var form_data = new FormData(document.getElementById('pegawai_form'));
-
-        $.ajax({
-            type: "POST",
-            url : url,
-            data: form_data,
-            success: function(data)
-            {
-                reload_pg();
-            },
-            error: function (response) {
-                $('#msg').html(response);
-            },
-            cache: false,
-            contentType: false,
-            processData: false,
+            $.ajax({
+                type: "POST",
+                url : url,
+                data: form_data,
+                success: function(data)
+                {
+                    reload_pg();
+                },
+                error: function (response) {
+                    $('#msg').html(response);
+                },
+                cache: false,
+                contentType: false,
+                processData: false,
+            });
         });
-    });
     });
 
     function getKodePG() {
@@ -778,7 +813,7 @@ function submit_uk(){
                     <form role="form" id="jenis_dokumen_form">
                         <div class="form-group">
                             <label>Kode Jenis Dokumen</label>
-                            <input type="text" class="form-control" id="kode_jd" value=<?=$kode_jd?> readonly>
+                            <input type="text" class="form-control" id="kode_jd" readonly>
                         </div>
 
                         <div class="form-group">
@@ -832,6 +867,20 @@ function submit_uk(){
         $('#jenis_dokumen_form')[0].reset();
         $('#modal_jd').modal('show');
         $('.modal-title').text('Tambah Data Jenis Dokumen');
+        
+        $.ajax({
+            url : "<?php echo site_url('master/getKodeJd')?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data)
+            {
+                $("#kode_jd").val(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Masalah saat mengambil data');
+            }
+        });
     }
 
     function edit_jd(id){
@@ -918,7 +967,7 @@ function submit_uk(){
                     <form role="form" id="status_dokumen_form">
                         <div class="form-group">
                             <label>Kode Status Dokumen</label>
-                            <input type="text" class="form-control" id="kode_sd" value=<?=$kode_sd?> readonly>
+                            <input type="text" class="form-control" id="kode_sd" readonly>
                         </div>
 
                         <div class="form-group">
@@ -972,6 +1021,19 @@ function submit_uk(){
         $('#status_dokumen_form')[0].reset();
         $('#modal_sd').modal('show');
         $('.modal-title').text('Tambah Data Status Dokumen');
+        $.ajax({
+            url : "<?php echo site_url('master/getKodeSd')?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data)
+            {
+                $("#kode_sd").val(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Masalah saat mengambil data');
+            }
+        });
     }
 
     function edit_sd(id){
@@ -1066,7 +1128,7 @@ function submit_uk(){
                     <form role="form" id="wajib_pajak_form">
                         <div class="form-group">
                             <label>Kode Wajib Pajak</label>
-                            <input type="text" class="form-control" id="kode_wp" value=<?=$kode_wp?> readonly>
+                            <input type="text" class="form-control" id="kode_wp" readonly>
                         </div>
 
                         <div class="form-group">
@@ -1146,6 +1208,19 @@ function submit_uk(){
         $('#wajib_pajak_form')[0].reset();
         $('#modal_wp').modal('show');
         $('.modal-title').text('Tambah Data Wajib Pajak');
+        $.ajax({
+            url : "<?php echo site_url('master/getKodeWp')?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data)
+            {
+                $("#kode_wp").val(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Masalah saat mengambil data');
+            }
+        });
     }
 
     function edit_wp(id){
@@ -1246,7 +1321,7 @@ function submit_uk(){
                     <form role="form" id="non_wp_form">
                         <div class="form-group">
                             <label>Kode Non Wajib Pajak</label>
-                            <input type="text" class="form-control" id="kode_nwp" value=<?=$kode_nwp?> readonly>
+                            <input type="text" class="form-control" id="kode_nwp" readonly>
                         </div>
 
                         <div class="form-group">
@@ -1321,6 +1396,19 @@ function submit_uk(){
         $('#non_wp_form')[0].reset();
         $('#modal_nwp').modal('show');
         $('.modal-title').text('Tambah Data Non Wajib Pajak');
+        $.ajax({
+            url : "<?php echo site_url('master/getKodeNwp')?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data)
+            {
+                $("#kode_nwp").val(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Masalah saat mengambil data');
+            }
+        });
     }
 
     function edit_nwp(id){

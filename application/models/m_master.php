@@ -2,7 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_master extends CI_Model {
-		// baca data tabel
+	// ambil kode
+	function kode_pg($id){
+		$query = $this->db->query("select ifnull(max(substr(NIP,4)),0)+1 as max_id from PEGAWAI where left(NIP,3) = '$id' ");
+		$id = $query->row_array();
+		$max = $id["max_id"];
+		return $max;
+	}
+
+	// baca data tabel
 
 	function getUk()
 	{
@@ -32,7 +40,7 @@ class M_master extends CI_Model {
 
 	function getPg()
 	{
-		$this->db->select('NIP, J.NAMA_JABATAN AS NAMA_J, PASSWORD, NAMA_PEGAWAI, ALAMAT_PEGAWAI, TELP_PEGAWAI, UK.NAMA_UNIT_KERJA AS NAMA_UK ');
+		$this->db->select('NIP, CONCAT(J.NAMA_JABATAN, " ",IFNULL(D.NAMA_DIVISI, "")) AS NAMA_J, PASSWORD, NAMA_PEGAWAI, ALAMAT_PEGAWAI, TELP_PEGAWAI, UK.NAMA_UNIT_KERJA AS NAMA_UK ');
 		$this->db->from('pegawai P');
 		$this->db->join('jabatan J','P.KODE_JABATAN = J.KODE_JABATAN','left');
 		$this->db->join('divisi D','D.KODE_DIVISI = J.KODE_DIVISI','left');
@@ -105,7 +113,9 @@ class M_master extends CI_Model {
 		$data = array(
 			'KODE_UNIT_KERJA' => $this->input->post('kode_uk'),
 			'NAMA_UNIT_KERJA' => $this->input->post('nama_uk'),
-			'ALAMAT_UNIT_KERJA' => $this->input->post('alamat_uk')
+			'ALAMAT_UNIT_KERJA' => $this->input->post('alamat_uk'),
+			'TELP_UNIT_KERJA' => $this->input->post('telp_uk'),
+			'FAX_UNIT_KERJA' => $this->input->post('fax_uk')
 			);
 		$this->db->insert('unit_kerja', $data);
 	}
@@ -268,7 +278,9 @@ class M_master extends CI_Model {
 				);
 		$data = array(
 				'NAMA_UNIT_KERJA' => $this->input->post('nama_uk'),
-				'ALAMAT_UNIT_KERJA' => $this->input->post('alamat_uk')
+				'ALAMAT_UNIT_KERJA' => $this->input->post('alamat_uk'),
+				'TELP_UNIT_KERJA' => $this->input->post('telp_uk'),
+				'FAX_UNIT_KERJA' => $this->input->post('fax_uk')
 				);
 		$this->db->where($where);
 		$this->db->update('unit_kerja',$data);
